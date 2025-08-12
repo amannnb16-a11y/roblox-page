@@ -16,11 +16,18 @@ function toggleLightMode() {
 }
 
 function showContact() {
-  document.getElementById("contactModal").classList.add("show");
-  document.getElementById("mainContent").classList.add("blurred");
+  var modal = document.getElementById("contactModal");
+  var blur = document.getElementById("pageBlur");
+  if (blur) blur.classList.add("show");
+  if (modal) modal.classList.add("show");
 }
 
 function closeContact() {
-  document.getElementById("contactModal").classList.remove("show");
-  document.getElementById("mainContent").classList.remove("blurred");
+  var modal = document.getElementById("contactModal");
+  var blur = document.getElementById("pageBlur");
+  if (modal) modal.classList.remove("show");
+  if (blur) blur.classList.remove("show");
+  // Also remove any legacy blur class on main content if present
+  var main = document.getElementById("mainContent");
+  if (main) main.classList.remove("blurred");
 }

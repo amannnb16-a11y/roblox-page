@@ -22,7 +22,7 @@
 
   <div class="layout">
     <aside class="sidebar">
-      <button onclick="location.href='contact.html'">Contact</button>
+      <button onclick="showContact()">Contact</button>
       <button onclick="toggleLightMode()">Light Mode Toggle</button>
     </aside>
     <div class="sidebar-separator"></div>
@@ -206,5 +206,20 @@
   </div>
 
   <script src="script.js"></script>
+
+  <!-- Backdrop for full-page blur (keeps modal sharp) -->
+  <div id="pageBlur" class="backdrop"></div>
+
+  <!-- Contact Modal -->
+  <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeContact()" aria-label="Close contact modal">✕</button>
+      <h2 id="contactTitle">Contact Me</h2>
+      <p>Discord: <strong>yourusername#0000</strong></p>
+      <p>Twitter: <a href="https://twitter.com/yourusername" target="_blank" rel="noopener">@yourusername</a></p>
+      <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+    </div>
+  </div>
+
 </body>
 </html>

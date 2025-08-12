@@ -378,16 +378,9 @@ body.light-mode .profile-pic {
   margin-bottom: 6px;
 }
 
-.speechbox {
-  background: rgba(0,0,0,0.6);
-  padding: 6px 10px;
-  border-radius: 20px;
-  display: inline-block;
-}
+.speechbox { background: #2c2c2c; padding: 6px 10px; border-radius: 20px; display: inline-block; }
 
-body.light-mode .speechbox {
-  background: rgba(255,255,255,0.6);
-}
+body.light-mode .speechbox { background: #f2f2f2; }
 
 .star {
   display: inline-block;
@@ -414,11 +407,19 @@ body.light-mode .speechbox {
 
 
 /* ENFORCED light mode visible speechbox styling */
-body.light-mode .speechbox {
-  background-color: #e6e6e6 !important;
-  padding: 8px 14px;
-  border-radius: 20px;
-  display: inline-flex;
-  justify-content: center;
-  gap: 3px;
+body.light-mode .speechbox { background: #f2f2f2; }
+
+
+/* Full-page blur overlay (keeps modal crisp) */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  display: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+.backdrop.show {
+  display: block;
 }
