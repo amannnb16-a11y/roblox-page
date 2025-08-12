@@ -327,14 +327,22 @@ body.light-mode .icon-game .info {
   width: 100%;
   margin-top: 20px;
   margin-bottom: 40px;
+margin-top: 8px;
+  margin-bottom: 12px;
 }
 .banner-img {
+  
+  
+  
+  
+  border-radius: 10px;
   width: 100%;
-  height: auto;
-  max-height: 200px;
+  height: 80px !important;
   object-fit: cover;
+  display: block;
   border-radius: 10px;
 }
+
 
 
 .sidebar button {
@@ -543,5 +551,6 @@ button,
 }
 
 @media (max-width: 768px) {
-  .banner-img { max-height: 100px; }
+  .banner-img { height: 64px !important; }
 }
+
