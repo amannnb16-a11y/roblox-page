@@ -17,11 +17,13 @@ function hideOverlay() {
 
 // === Theme Toggle ===
 function toggleLightMode() {
+  hideOverlay();
   document.body.classList.toggle('light-mode');
 }
 
 // === Contact Modal ===
 function showContact() {
+  hideOverlay();
   var modal = document.getElementById('contactModal');
   var blur = document.getElementById('pageBlur');
   if (blur) blur.classList.add('show');
@@ -36,33 +38,27 @@ function closeContact() {
 
 // === Review Modal ===
 function openReview(cardEl) {
+  hideOverlay();
   var modal = document.getElementById('reviewModal');
   var blur = document.getElementById('pageBlur');
   if (!modal) return;
-  // Username
   var nameEl = cardEl.querySelector('.username');
   var username = nameEl ? nameEl.textContent.trim() : 'User';
-  // Stars (copy HTML of the speechbox's stars)
   var starsEl = cardEl.querySelector('.speechbox');
   var starsHTML = starsEl ? starsEl.innerHTML : '';
-  // Avatar (from background-image style)
   var picEl = cardEl.querySelector('.profile-pic');
   var bg = picEl ? (picEl.style.backgroundImage || '') : '';
   var match = bg.match(/url\(['"]?(.*?)['"]?\)/);
   var avatarUrl = match ? match[1] : '';
-
   var reviewText = cardEl.getAttribute('data-review') || '';
-
   var avatarNode = modal.querySelector('.review-avatar');
   var starsNode  = modal.querySelector('.review-stars');
   var userNode   = modal.querySelector('.review-username');
   var textNode   = modal.querySelector('.review-text');
-
   if (avatarNode) avatarNode.style.backgroundImage = avatarUrl ? "url('" + avatarUrl + "')" : '';
   if (starsNode)  starsNode.innerHTML = starsHTML;
   if (userNode)   userNode.textContent = username + '’s review:';
   if (textNode)   textNode.textContent = reviewText || 'This user has not added a review yet.';
-
   if (blur) blur.classList.add('show');
   modal.classList.add('show');
 }
@@ -146,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('keydown', handleGlobalEsc);
 
 function showTerms() {
+  hideOverlay();
   var modal = document.getElementById('termsModal');
   var blur = document.getElementById('pageBlur');
   if (blur) blur.classList.add('show');
@@ -165,3 +162,14 @@ function setupTermsOutsideClick() {
   });
 }
 document.addEventListener('DOMContentLoaded', setupTermsOutsideClick);
+
+// Close overlay on click anywhere inside it
+function setupOverlayClose() {
+  var overlay = document.getElementById('overlay');
+  if (!overlay) return;
+  overlay.addEventListener('click', function(e) {
+    // close whether click is on background or image
+    hideOverlay();
+  });
+}
+document.addEventListener('DOMContentLoaded', setupOverlayClose);
