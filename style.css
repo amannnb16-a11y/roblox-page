@@ -133,13 +133,9 @@ body {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s;
-  height: auto;
   display: flex;
   flex-direction: column;
-}
-
-.icon-game:hover {
-  transform: scale(1.05);
+  height: auto;
 }
 
 .icon-game img {
