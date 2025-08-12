@@ -31,3 +31,17 @@ function closeContact() {
   var main = document.getElementById("mainContent");
   if (main) main.classList.remove("blurred");
 }
+
+// Accessibility: allow Enter/Space on nav items
+function setupNavAccessibility() {
+  var items = document.querySelectorAll('.nav-item[role="button"]');
+  items.forEach(function(el) {
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        el.click();
+        e.preventDefault();
+      }
+    });
+  });
+}
+document.addEventListener('DOMContentLoaded', setupNavAccessibility);

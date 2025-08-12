@@ -360,18 +360,17 @@ body.light-mode .profile-card {
 }
 
 .profile-pic {
-  width: 80px;
-  height: 80px;
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
-  margin: 0 auto 8px;
+  margin: 0 auto 10px;
   background-color: #333;
+  border: 3px solid #777;
 }
 
-body.light-mode .profile-pic {
-  background-color: #cccccc;
-}
+body.light-mode .profile-pic { background-color: #cccccc; border-color: #999; }
 
 .username {
   font-size: 14px;
@@ -422,4 +421,35 @@ body.light-mode .speechbox { background: #f2f2f2; }
 }
 .backdrop.show {
   display: block;
+}
+
+/* Image overlay for large preview */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.75);
+  z-index: 1100;
+}
+.overlay.show { display: flex; }
+.overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+}
+
+/* Responsive grids */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  .icon-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .icon-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+  .icon-grid { grid-template-columns: repeat(2, 1fr); }
 }
