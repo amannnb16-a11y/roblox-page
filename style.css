@@ -79,6 +79,47 @@ body {
   padding: 20px;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.game {
+  background: #2c2c2c;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.game:hover {
+  transform: scale(1.05);
+}
+
+.game img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.info {
+  padding: 10px;
+}
+
+.rating {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.category-title, .subcategory-title {
+  font-size: 18px;
+  margin-top: 40px;
+  font-weight: 600;
+}
+
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -92,7 +133,10 @@ body {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s;
-  aspect-ratio: 1 / 1;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .icon-game:hover {
@@ -123,11 +167,13 @@ body {
   justify-content: center;
   z-index: 1000;
 }
+
 .overlay img {
   max-width: 90%;
   max-height: 90%;
   border-radius: 10px;
 }
+
 .overlay.show {
   display: flex;
 }
