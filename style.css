@@ -160,11 +160,11 @@ body.light-mode {
 }
 
 body.light-mode .topnav {
-  background-color: #cccccc;
+  background-color: #e6e6e6;
 }
 
 body.light-mode .sidebar {
-  background-color: #cccccc;
+  background-color: #e6e6e6;
   color: #000;
 }
 
@@ -236,4 +236,15 @@ body.light-mode .icon-game {
 /* Blur background */
 .blurred {
   filter: blur(6px);
+}
+
+
+/* Ensure modal is never blurred */
+#contactModal {
+  z-index: 1002;
+}
+
+#contactModal .modal-content {
+  filter: none !important;
+  backdrop-filter: none !important;
 }
