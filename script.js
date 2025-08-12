@@ -11,12 +11,10 @@ function hideOverlay() {
   document.getElementById("overlay").classList.remove("show");
 }
 
-// Light Mode Toggle
 function toggleLightMode() {
   document.body.classList.toggle("light-mode");
 }
 
-// Contact Modal
 function showContact() {
   document.getElementById("contactModal").classList.add("show");
   document.getElementById("mainContent").classList.add("blurred");
