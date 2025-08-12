@@ -22,13 +22,12 @@
 
   <div class="layout">
     <aside class="sidebar">
-      <button>Orders</button>
-      <button>Passwords</button>
-      <button>Settings</button>
+      <button onclick="showContact()">Contact</button>
+      <button onclick="toggleLightMode()">Light Mode Toggle</button>
     </aside>
     <div class="sidebar-separator"></div>
 
-    <main class="main-content">
+    <main class="main-content" id="mainContent">
       <h2>Recommended For You</h2>
 
       <div class="subcategory-title">Popular with Anime</div>
@@ -131,6 +130,15 @@
 <div class="game" onclick="expandImage(this)">
           <img src="game22.jpg" alt="Upcoming Game 22">
           <div class="info"><div class="rating">👍 112% Rating</div></div>
+        </div>
+      </div>
+    
+      <div id="contactModal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" onclick="closeContact()">×</span>
+          <h2>Contact Me</h2>
+          <p>Discord: <strong>yourusername#0000</strong></p>
+          <p>Twitter: <a href="#" target="_blank">@yourtwitter</a></p>
         </div>
       </div>
     </main>

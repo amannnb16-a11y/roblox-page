@@ -172,3 +172,74 @@ body {
 .overlay.show {
   display: flex;
 }
+
+
+/* Light Mode Colors */
+body.light-mode {
+  background-color: #cccccc;
+  color: #000;
+}
+
+body.light-mode .topnav {
+  background-color: #d9d9d9;
+}
+
+body.light-mode .sidebar {
+  background-color: #999999;
+}
+
+body.light-mode .top-border {
+  background-color: royalblue;
+}
+
+body.light-mode .sidebar-separator {
+  background-color: white;
+}
+
+body.light-mode .game,
+body.light-mode .icon-game {
+  background-color: #e6e6e6;
+}
+
+/* Modal Contact */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 1001;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  color: black;
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Blurred background */
+.blurred {
+  filter: blur(6px);
+}
