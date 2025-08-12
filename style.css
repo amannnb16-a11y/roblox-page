@@ -188,7 +188,7 @@ body.light-mode .rating {
 
 body.light-mode .game,
 body.light-mode .icon-game {
-  background-color: #f2f2f2 !important;
+  background-color: #f2f2f2;
 }
 
 /* Contact Modal */
@@ -304,11 +304,11 @@ body.light-mode .sidebar button {
 
 
 body.light-mode .icon-game {
-  background-color: #f2f2f2 !important;
+  background-color: #f2f2f2;
 }
 
 body.light-mode .icon-game .info {
-  background-color: #f2f2f2 !important;
+  background-color: #f2f2f2;
 }
 
 .homepage-banner {
@@ -410,22 +410,4 @@ body.light-mode .speechbox {
 
 .star.empty {
   background-color: #999;
-}
-
-
-/* ENFORCED light mode visible speechbox styling */
-body.light-mode .speechbox {
-  background-color: #e6e6e6 !important;
-  padding: 8px 14px;
-  border-radius: 20px;
-  display: inline-flex;
-  justify-content: center;
-  gap: 3px;
-}
-
-
-/* Smooth transitions for theme toggle */
-body, .topnav, .sidebar, .game, .icon-game, .info, .rating,
-.nav-links .nav-item, .speechbox {
-  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
