@@ -506,19 +506,8 @@ body.light-mode .speechbox { background: #f2f2f2; }
   }
 }
 
-/* Blur-up for thumbnails */
-.game img, .icon-game img {
-  filter: blur(6px);
-  transform: scale(1.02);
-  opacity: 0.85;
-  transition: filter 250ms ease, transform 250ms ease, opacity 250ms ease;
-}
-.game img.loaded, .icon-game img.loaded {
-  filter: none;
-  transform: none;
-  opacity: 1;
-}
-
+/* Blur-up removed: show images crisp by default */
+.game img, .icon-game img { filter: none; transform: none; opacity: 1; } 
 /* Focus rings */
 :focus-visible {
   outline: 3px solid #4169e1; /* royal blue to match divider */

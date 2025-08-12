@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', setupNavAccessibility);
 
 
 // Global ESC to close overlay/contact
-\1
+
   closeReview();
-\2
+
 }
 document.addEventListener('keydown', handleGlobalEsc);
 
@@ -165,3 +165,12 @@ function setupReviewOutsideClick() {
 }
 document.addEventListener('DOMContentLoaded', setupReviewOutsideClick);
 
+
+function handleGlobalEsc(e) {
+  if (e.key === 'Escape') {
+    hideOverlay();
+    closeContact();
+    if (typeof closeReview === 'function') closeReview();
+  }
+}
+document.addEventListener('keydown', handleGlobalEsc);
