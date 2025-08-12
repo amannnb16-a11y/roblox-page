@@ -66,6 +66,11 @@ body {
   letter-spacing: 0.2px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: #444;
   color: white;
   border: none;
@@ -261,6 +266,11 @@ body.light-mode .sidebar button {
   letter-spacing: 0.2px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: #e6e6e6;
   color: #000;
 }
@@ -351,6 +361,11 @@ margin-top: 8px;
   letter-spacing: 0.2px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: none;
   border: none;
   color: white;
@@ -362,6 +377,11 @@ margin-top: 8px;
 }
 
 body.light-mode .sidebar button {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
   font-weight: 600;
   letter-spacing: 0.2px;
@@ -390,26 +410,22 @@ body.light-mode .profile-card {
 }
 
 .profile-pic {
-  width: 104px;
-  height: 104px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  margin: 0 auto 10px;
-  background-color: #333;
+  width: 104px; height: 104px; border-radius: 50%;
+  background-size: cover; background-position: center;
+  margin: 0 auto 10px; background-color: #333;
   border: 3px solid #777;
 }
 
-body.light-mode .profile-pic { background-color: #cccccc; border-color: #999; }
+body.light-mode .profile-pic { background-color:#cccccc; border-color:#999; }
 
 .username {
   font-size: 14px;
   margin-bottom: 6px;
 }
 
-.speechbox { background: #2c2c2c; padding: 6px 10px; border-radius: 20px; display: inline-block; }
+.speechbox { background:#2c2c2c; padding:6px 10px; border-radius:20px; display:inline-block; }
 
-body.light-mode .speechbox { background: #f2f2f2; }
+body.light-mode .speechbox { background:#f2f2f2; }
 
 .star {
   display: inline-block;
@@ -436,7 +452,7 @@ body.light-mode .speechbox { background: #f2f2f2; }
 
 
 /* ENFORCED light mode visible speechbox styling */
-body.light-mode .speechbox { background: #f2f2f2; }
+body.light-mode .speechbox { background:#f2f2f2; }
 
 
 /* Full-page blur overlay (keeps modal crisp) */
@@ -454,29 +470,14 @@ body.light-mode .speechbox { background: #f2f2f2; }
 }
 
 /* Image overlay for large preview */
-.overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.75);
-  z-index: 1100;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+.overlay { position: fixed; inset: 0; display: flex; align-items:center; justify-content:center;
+  background: rgba(0,0,0,0.75); z-index:1100; opacity:0; visibility:hidden; pointer-events:none;
   transition: opacity 200ms ease, visibility 200ms ease;
 }
-.overlay.show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-.overlay img {
-  max-width: 70vw;
-  max-height: 70vh;
-  border-radius: 12px;
-  transition: transform 200ms ease, opacity 200ms ease;
+.overlay.show { opacity:1; visibility:visible; pointer-events:auto; }
+.overlay img { max-width: 70vw; max-height: 70vh; border-radius: 12px; transition: transform 200ms ease, opacity 200ms ease; }
+@media (max-width: 768px) {
+  .overlay img { max-width: 90vw; max-height: 80vh; }
 }
 
 /* Responsive grids */
@@ -506,8 +507,6 @@ body.light-mode .speechbox { background: #f2f2f2; }
   }
 }
 
-/* Blur-up removed: show images crisp by default */
-.game img, .icon-game img { filter: none; transform: none; opacity: 1; } 
 /* Focus rings */
 :focus-visible {
   outline: 3px solid #4169e1; /* royal blue to match divider */
@@ -599,26 +598,15 @@ body.light-mode .review-text { border-color: #888; }
   }
 }
 
-/* Terms modal bigger layout */
-.terms-content {
-  max-width: 980px;
-  width: 92vw;
-  max-height: 80vh;
-  overflow: hidden;
-}
-.terms-content .terms-body {
-  margin-top: 8px;
-  overflow: auto;
-  max-height: calc(80vh - 80px);
-}
-.terms-content h2 {
-  margin: 0 0 8px 0;
-}
-.terms-content h3 {
-  margin: 14px 0 6px 0;
-}
+/* Terms modal larger */
+.terms-content { max-width: 980px; width:92vw; max-height:80vh; overflow:hidden; }
+.terms-content .terms-body { margin-top:8px; overflow:auto; max-height:calc(80vh - 80px); }
+.terms-content h2 { margin:0 0 8px 0; }
+.terms-content h3 { margin:14px 0 6px 0; }
+
+.game img, .icon-game img { filter:none; transform:none; opacity:1; }
 
 /* Swap logos per theme */
-.roblox-logo--light { display: none; }
-body.light-mode .roblox-logo--dark { display: none; }
-body.light-mode .roblox-logo--light { display: block; }
+.roblox-logo--light { display:none; }
+body.light-mode .roblox-logo--dark { display:none; }
+body.light-mode .roblox-logo--light { display:block; }

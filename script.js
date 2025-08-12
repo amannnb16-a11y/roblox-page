@@ -10,7 +10,6 @@ function expandImage(el) {
     overlayImg.src = img.src;
     overlay.classList.add('show');
   } catch (e) { console.error('expandImage error', e); }
-}
 function hideOverlay() {
   var overlay = document.getElementById('overlay');
   if (overlay) overlay.classList.remove('show');
@@ -125,8 +124,14 @@ function setupReviewOpeners() {
 }
 
 // Global ESC handler
-\1
-    closeTerms();}
+function handleGlobalEsc(e) {
+  if (e.key === 'Escape') {
+    hideOverlay();
+    closeContact();
+    closeReview();
+    closeTerms();
+  }
+}
 }
 
 // DOM Ready
@@ -140,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 document.addEventListener('keydown', handleGlobalEsc);
 
-
 function showTerms() {
   var modal = document.getElementById('termsModal');
   var blur = document.getElementById('pageBlur');
@@ -153,8 +157,6 @@ function closeTerms() {
   if (modal) modal.classList.remove('show');
   if (blur) blur.classList.remove('show');
 }
-
-
 function setupTermsOutsideClick() {
   var modal = document.getElementById('termsModal');
   if (!modal) return;
@@ -163,4 +165,3 @@ function setupTermsOutsideClick() {
   });
 }
 document.addEventListener('DOMContentLoaded', setupTermsOutsideClick);
-
