@@ -45,3 +45,51 @@ function setupNavAccessibility() {
   });
 }
 document.addEventListener('DOMContentLoaded', setupNavAccessibility);
+
+
+// Global ESC to close overlay/contact
+function handleGlobalEsc(e) {
+  if (e.key === 'Escape') {
+    hideOverlay();
+    closeContact();
+  }
+}
+document.addEventListener('keydown', handleGlobalEsc);
+
+
+// Click outside modal-content to close contact
+function setupModalOutsideClick() {
+  var modal = document.getElementById('contactModal');
+  if (!modal) return;
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeContact();
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', setupModalOutsideClick);
+
+
+// Set --i for staggered hover delays
+function setupStaggeredHover() {
+  var gameCards = document.querySelectorAll('.grid .game');
+  gameCards.forEach(function(el, i) { el.style.setProperty('--i', i % 12); });
+  var iconCards = document.querySelectorAll('.icon-grid .icon-game');
+  iconCards.forEach(function(el, i) { el.style.setProperty('--i', i % 12); });
+}
+document.addEventListener('DOMContentLoaded', setupStaggeredHover);
+
+
+// Blur-up image loader on cards
+function setupBlurUp() {
+  function markLoaded(img) { img.classList.add('loaded'); }
+  var imgs = document.querySelectorAll('.game img, .icon-game img');
+  imgs.forEach(function(img) {
+    if (img.complete && img.naturalWidth > 0) {
+      markLoaded(img);
+    } else {
+      img.addEventListener('load', function() { markLoaded(img); }, { once: true });
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', setupBlurUp);

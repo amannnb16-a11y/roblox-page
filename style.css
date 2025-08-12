@@ -427,17 +427,26 @@ body.light-mode .speechbox { background: #f2f2f2; }
 .overlay {
   position: fixed;
   inset: 0;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0,0,0,0.75);
   z-index: 1100;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 200ms ease, visibility 200ms ease;
 }
-.overlay.show { display: flex; }
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 .overlay img {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 12px;
+  transition: transform 200ms ease, opacity 200ms ease;
 }
 
 /* Responsive grids */
@@ -452,4 +461,51 @@ body.light-mode .speechbox { background: #f2f2f2; }
 @media (max-width: 480px) {
   .grid { grid-template-columns: 1fr; }
   .icon-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* Smooth theme transitions */
+@media (prefers-reduced-motion: no-preference) {
+  html, body,
+  .topnav, .sidebar,
+  .game, .game .info, .rating,
+  .icon-grid, .icon-game, .icon-game .info,
+  .profile-pic, .speechbox, .username,
+  .nav-item, .top-border, .sidebar-separator {
+    transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease, filter 240ms ease;
+  }
+}
+
+/* Blur-up for thumbnails */
+.game img, .icon-game img {
+  filter: blur(6px);
+  transform: scale(1.02);
+  opacity: 0.85;
+  transition: filter 250ms ease, transform 250ms ease, opacity 250ms ease;
+}
+.game img.loaded, .icon-game img.loaded {
+  filter: none;
+  transform: none;
+  opacity: 1;
+}
+
+/* Focus rings */
+:focus-visible {
+  outline: 3px solid #4169e1; /* royal blue to match divider */
+  outline-offset: 2px;
+}
+.nav-item[role="button"],
+button,
+.game,
+.icon-game,
+.close-btn,
+.profile-icon {
+  border-radius: 8px; /* smooth focus shape */
+}
+
+/* Staggered hover timing */
+.grid .game,
+.icon-grid .icon-game {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  transition-delay: calc(var(--i, 0) * 20ms);
 }
