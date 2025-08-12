@@ -344,12 +344,6 @@ body.light-mode .sidebar button {
 
 .profile-section {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  padding: 30px 0 10px;
-  display: flex;
   justify-content: center;
   gap: 40px;
   padding: 30px 0 10px;
