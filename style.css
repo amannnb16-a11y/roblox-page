@@ -554,3 +554,58 @@ button,
   .banner-img { height: 64px !important; }
 }
 
+
+/* Review modal layout */
+.review-content {
+  max-width: 800px;
+  width: 90vw;
+  border-radius: 12px;
+}
+.review-layout {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.review-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid #777;
+}
+.review-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.review-stars {
+  display: inline-block;
+}
+.review-username {
+  font-weight: 600;
+  opacity: 0.9;
+}
+.review-text {
+  border: 2px solid #555;
+  border-radius: 10px;
+  padding: 14px;
+  line-height: 1.5;
+  max-width: 100%;
+  color: inherit;
+  background: transparent;
+}
+/* Theme tweaks */
+body.light-mode .review-avatar { border-color: #999; }
+body.light-mode .review-text { border-color: #888; }
+
+@media (max-width: 640px) {
+  .review-layout {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .review-avatar {
+    margin: 0 auto 6px;
+  }
+}

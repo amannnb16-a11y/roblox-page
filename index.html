@@ -30,7 +30,7 @@
     <main class="main-content" id="mainContent">
       
 <div class="homepage-banner">
-  <img src="https://cdn.discordapp.com/attachments/1404724159648501811/1404892209982996663/banner.png?ex=689cd754&is=689b85d4&hm=61ce38699e749f5c635233479e67547c68bc8652dc0b7b02318b63fc7ebfbcc7&" alt="Home Banner" class="banner-img"/>
+  <img src="logo-banner.jpg" alt="Home Banner" class="banner-img"/>
 </div>
 <div class="profile-section">
   <div class="profile-card">
@@ -217,6 +217,22 @@
       <h2 id="contactTitle">Contact Me</h2>
       <p>Discord: <strong>indentina</strong></p>
       <p>Twitter: <a href="https://x.com/indentina" target="_blank" rel="noopener">@indentina</a></p>
+    </div>
+  </div>
+
+
+  <!-- Profile Review Modal -->
+  <div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+    <div class="modal-content review-content" role="document">
+      <button class="close-btn" onclick="closeReview()" aria-label="Close review modal">✕</button>
+      <div class="review-layout">
+        <div class="review-avatar" aria-hidden="true"></div>
+        <div class="review-panel">
+          <div class="review-stars" aria-label="User rating"></div>
+          <div class="review-username" id="reviewTitle">username’s review:</div>
+          <div class="review-text">This is a placeholder review. Add a <code>data-review</code> attribute to a profile card to customize.</div>
+        </div>
+      </div>
     </div>
   </div>
 
