@@ -1,127 +1,68 @@
 
+// === Overlay Preview ===
 function expandImage(el) {
-  const imgSrc = el.querySelector("img").src;
-  const overlay = document.getElementById("overlay");
-  const overlayImg = document.getElementById("overlayImg");
-  overlayImg.src = imgSrc;
-  overlay.classList.add("show");
+  try {
+    var img = el.querySelector('img');
+    if (!img) return;
+    var overlay = document.getElementById('overlay');
+    var overlayImg = document.getElementById('overlayImg');
+    if (!overlay || !overlayImg) return;
+    overlayImg.src = img.src;
+    overlay.classList.add('show');
+  } catch (e) { console.error('expandImage error', e); }
 }
-
 function hideOverlay() {
-  document.getElementById("overlay").classList.remove("show");
+  var overlay = document.getElementById('overlay');
+  if (overlay) overlay.classList.remove('show');
 }
 
+// === Theme Toggle ===
 function toggleLightMode() {
-  document.body.classList.toggle("light-mode");
+  document.body.classList.toggle('light-mode');
 }
 
+// === Contact Modal ===
 function showContact() {
-  var modal = document.getElementById("contactModal");
-  var blur = document.getElementById("pageBlur");
-  if (blur) blur.classList.add("show");
-  if (modal) modal.classList.add("show");
-}
-
-function closeContact() {
-  var modal = document.getElementById("contactModal");
-  var blur = document.getElementById("pageBlur");
-  if (modal) modal.classList.remove("show");
-  if (blur) blur.classList.remove("show");
-  // Also remove any legacy blur class on main content if present
-  var main = document.getElementById("mainContent");
-  if (main) main.classList.remove("blurred");
-}
-
-// Accessibility: allow Enter/Space on nav items
-function setupNavAccessibility() {
-  var items = document.querySelectorAll('.nav-item[role="button"]');
-  items.forEach(function(el) {
-    el.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        el.click();
-        e.preventDefault();
-      }
-    });
-  });
-}
-document.addEventListener('DOMContentLoaded', setupNavAccessibility);
-
-
-// Global ESC to close overlay/contact
-
-  closeReview();
-
-}
-document.addEventListener('keydown', handleGlobalEsc);
-
-
-// Click outside modal-content to close contact
-function setupModalOutsideClick() {
   var modal = document.getElementById('contactModal');
-  if (!modal) return;
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) {
-      closeContact();
-    }
-  });
+  var blur = document.getElementById('pageBlur');
+  if (blur) blur.classList.add('show');
+  if (modal) modal.classList.add('show');
 }
-document.addEventListener('DOMContentLoaded', setupModalOutsideClick);
-
-
-// Set --i for staggered hover delays
-function setupStaggeredHover() {
-  var gameCards = document.querySelectorAll('.grid .game');
-  gameCards.forEach(function(el, i) { el.style.setProperty('--i', i % 12); });
-  var iconCards = document.querySelectorAll('.icon-grid .icon-game');
-  iconCards.forEach(function(el, i) { el.style.setProperty('--i', i % 12); });
+function closeContact() {
+  var modal = document.getElementById('contactModal');
+  var blur = document.getElementById('pageBlur');
+  if (modal) modal.classList.remove('show');
+  if (blur) blur.classList.remove('show');
 }
-document.addEventListener('DOMContentLoaded', setupStaggeredHover);
 
-
-// Blur-up image loader on cards
-function setupBlurUp() {
-  function markLoaded(img) { img.classList.add('loaded'); }
-  var imgs = document.querySelectorAll('.game img, .icon-game img');
-  imgs.forEach(function(img) {
-    if (img.complete && img.naturalWidth > 0) {
-      markLoaded(img);
-    } else {
-      img.addEventListener('load', function() { markLoaded(img); }, { once: true });
-    }
-  });
-}
-document.addEventListener('DOMContentLoaded', setupBlurUp);
-
-
+// === Review Modal ===
 function openReview(cardEl) {
   var modal = document.getElementById('reviewModal');
   var blur = document.getElementById('pageBlur');
   if (!modal) return;
-  // Pull username
+  // Username
   var nameEl = cardEl.querySelector('.username');
-  var username = nameEl ? nameEl.textContent.trim() : "User";
-  // Pull stars (clone existing HTML from speechbox)
+  var username = nameEl ? nameEl.textContent.trim() : 'User';
+  // Stars (copy HTML of the speechbox's stars)
   var starsEl = cardEl.querySelector('.speechbox');
   var starsHTML = starsEl ? starsEl.innerHTML : '';
-  // Pull avatar url from inline background-image
+  // Avatar (from background-image style)
   var picEl = cardEl.querySelector('.profile-pic');
   var bg = picEl ? (picEl.style.backgroundImage || '') : '';
   var match = bg.match(/url\(['"]?(.*?)['"]?\)/);
   var avatarUrl = match ? match[1] : '';
 
-  // Optional custom review via data-review attr
-  var customReview = cardEl.getAttribute('data-review') || "Your review text here. Replace by adding data-review to this profile.";
+  var reviewText = cardEl.getAttribute('data-review') || '';
 
-  // Populate modal
   var avatarNode = modal.querySelector('.review-avatar');
-  var starsNode = modal.querySelector('.review-stars');
-  var userNode = modal.querySelector('.review-username');
-  var textNode = modal.querySelector('.review-text');
+  var starsNode  = modal.querySelector('.review-stars');
+  var userNode   = modal.querySelector('.review-username');
+  var textNode   = modal.querySelector('.review-text');
 
   if (avatarNode) avatarNode.style.backgroundImage = avatarUrl ? "url('" + avatarUrl + "')" : '';
-  if (starsNode) starsNode.innerHTML = starsHTML;
-  if (userNode) userNode.textContent = username + "’s review:";
-  if (textNode) textNode.textContent = customReview;
+  if (starsNode)  starsNode.innerHTML = starsHTML;
+  if (userNode)   userNode.textContent = username + '’s review:';
+  if (textNode)   textNode.textContent = reviewText || 'This user has not added a review yet.';
 
   if (blur) blur.classList.add('show');
   modal.classList.add('show');
@@ -133,44 +74,72 @@ function closeReview() {
   if (blur) blur.classList.remove('show');
 }
 
-
-// Click/keyboard openers for profile cards
-function setupReviewOpeners() {
-  var cards = document.querySelectorAll('.profile-card');
-  cards.forEach(function(card) {
-    var pic = card.querySelector('.profile-pic');
-    if (pic) {
-      pic.setAttribute('role','button');
-      pic.setAttribute('tabindex','0');
-      pic.addEventListener('click', function() { openReview(card); });
-      pic.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openReview(card); }
-      });
-    } else {
-      // fallback: whole card clickable
-      card.addEventListener('click', function() { openReview(card); });
-    }
+// === Accessibility & UX Helpers ===
+function setupNavAccessibility() {
+  var items = document.querySelectorAll('.nav-item[role="button"]');
+  items.forEach(function(el) {
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.click();
+      }
+    });
   });
 }
-document.addEventListener('DOMContentLoaded', setupReviewOpeners);
-
-
-// Click outside review content to close
+function setupModalOutsideClick() {
+  var modal = document.getElementById('contactModal');
+  if (!modal) return;
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeContact();
+  });
+}
 function setupReviewOutsideClick() {
   var modal = document.getElementById('reviewModal');
   if (!modal) return;
   modal.addEventListener('click', function(e) {
-    if (e.target === modal) { closeReview(); }
+    if (e.target === modal) closeReview();
   });
 }
-document.addEventListener('DOMContentLoaded', setupReviewOutsideClick);
+function setupStaggeredHover() {
+  var gameCards = document.querySelectorAll('.grid .game');
+  gameCards.forEach(function(el, i) { el.style.setProperty('--i', i % 12); });
+  var iconCards = document.querySelectorAll('.icon-grid .icon-game');
+  iconCards.forEach(function(el, i) { el.style.setProperty('--i', i % 12); });
+}
+// Keep function for compatibility, but it does nothing since blur-up CSS is removed
+function setupBlurUp() { /* no-op */ }
 
+// Make profile pics clickable
+function setupReviewOpeners() {
+  var cards = document.querySelectorAll('.profile-card');
+  cards.forEach(function(card) {
+    var pic = card.querySelector('.profile-pic');
+    var target = pic || card;
+    target.setAttribute('role', 'button');
+    target.setAttribute('tabindex', '0');
+    target.addEventListener('click', function() { openReview(card); });
+    target.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openReview(card); }
+    });
+  });
+}
 
+// Global ESC handler
 function handleGlobalEsc(e) {
   if (e.key === 'Escape') {
     hideOverlay();
     closeContact();
-    if (typeof closeReview === 'function') closeReview();
+    closeReview();
   }
 }
+
+// DOM Ready
+document.addEventListener('DOMContentLoaded', function() {
+  setupNavAccessibility();
+  setupModalOutsideClick();
+  setupReviewOutsideClick();
+  setupStaggeredHover();
+  setupBlurUp();
+  setupReviewOpeners();
+});
 document.addEventListener('keydown', handleGlobalEsc);
