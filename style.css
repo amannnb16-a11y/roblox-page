@@ -218,3 +218,15 @@ body.light-mode .rating, body.light-mode .icon-game .info { color: #000; }
 body.light-mode .main-content {
   background-color: #ffffff;
 }
+
+
+/* Light mode topnav and sidebar at 95% gray */
+body.light-mode .topnav,
+body.light-mode .sidebar {
+  background-color: #f2f2f2;
+}
+
+/* Light mode profile circles background at 80% gray */
+body.light-mode .profile-strip .profile-circle {
+  background-color: #cccccc;
+}
