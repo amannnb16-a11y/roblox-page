@@ -88,16 +88,15 @@ body {
 }
 
 .game {
+  box-shadow: none;
   background: #2c2c2c;
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.game:hover {
-  transform: scale(1.05);
-}
+.game:hover { transform: scale(1.05); box-shadow: 0 10px 24px rgba(0,0,0,0.25), 0 4px 12px rgba(0,0,0,0.15); }
 
 .game img {
   width: 100%;
@@ -129,11 +128,12 @@ body {
 }
 
 .icon-game {
+  box-shadow: none;
   background: #2c2c2c;
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
   height: auto;
@@ -188,6 +188,7 @@ body.light-mode .rating {
 
 body.light-mode .game,
 body.light-mode .icon-game {
+  box-shadow: none;
   background-color: #f2f2f2 !important;
 }
 
@@ -304,6 +305,7 @@ body.light-mode .sidebar button {
 
 
 body.light-mode .icon-game {
+  box-shadow: none;
   background-color: #f2f2f2 !important;
 }
 
@@ -506,6 +508,9 @@ button,
 /* Staggered hover timing */
 .grid .game,
 .icon-grid .icon-game {
+  box-shadow: none;
   transition: transform 180ms ease, box-shadow 180ms ease;
   transition-delay: calc(var(--i, 0) * 20ms);
 }
+
+.icon-game:hover { transform: scale(1.05); box-shadow: 0 10px 24px rgba(0,0,0,0.25), 0 4px 12px rgba(0,0,0,0.15); }
