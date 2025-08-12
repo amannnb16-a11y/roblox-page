@@ -422,3 +422,10 @@ body.light-mode .speechbox {
   justify-content: center;
   gap: 3px;
 }
+
+
+/* Smooth transitions for theme toggle */
+body, .topnav, .sidebar, .game, .icon-game, .info, .rating,
+.nav-links .nav-item, .speechbox {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
