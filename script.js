@@ -8,6 +8,19 @@ function expandImage(el) {
 }
 
 function hideOverlay() {
-  const overlay = document.getElementById("overlay");
-  overlay.classList.remove("show");
+  document.getElementById("overlay").classList.remove("show");
+}
+
+function toggleLightMode() {
+  document.body.classList.toggle("light-mode");
+}
+
+function showContact() {
+  document.getElementById("contactModal").classList.add("show");
+  document.getElementById("mainContent").classList.add("blurred");
+}
+
+function closeContact() {
+  document.getElementById("contactModal").classList.remove("show");
+  document.getElementById("mainContent").classList.remove("blurred");
 }
