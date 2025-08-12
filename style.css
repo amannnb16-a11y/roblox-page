@@ -360,8 +360,8 @@ body.light-mode .profile-card {
 }
 
 .profile-pic {
-  width: 80px;
-  height: 80px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
@@ -370,7 +370,13 @@ body.light-mode .profile-card {
 }
 
 body.light-mode .profile-pic {
-  background-color: #cccccc;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto 8px;
+  background-color: #333;
 }
 
 .username {
@@ -410,15 +416,4 @@ body.light-mode .speechbox {
 
 .star.empty {
   background-color: #999;
-}
-
-
-/* ENFORCED light mode visible speechbox styling */
-body.light-mode .speechbox {
-  background-color: #e6e6e6 !important;
-  padding: 8px 14px;
-  border-radius: 20px;
-  display: inline-flex;
-  justify-content: center;
-  gap: 3px;
 }
