@@ -415,7 +415,7 @@ body.light-mode .speechbox {
 
 /* ENFORCED light mode visible speechbox styling */
 body.light-mode .speechbox {
-  background-color: #4d4d4d !important;
+  background-color: #b3b3b3 !important;
   padding: 8px 14px;
   border-radius: 20px;
   display: inline-flex;
