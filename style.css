@@ -340,3 +340,9 @@ body.light-mode .sidebar button {
   color: black;
   border-bottom: 2px solid #999999;
 }
+
+
+/* Smooth transitions for color/background */
+body, .topnav, .sidebar, .game, .icon-game, .info, .rating, .nav-links .nav-item {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
