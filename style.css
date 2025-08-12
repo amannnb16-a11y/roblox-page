@@ -65,7 +65,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin-top: 20px;
 }
@@ -84,7 +84,7 @@ body {
 
 .game img {
   width: 100%;
-  height: 120px;
+  height: auto; aspect-ratio: 16/9;
   object-fit: cover;
 }
 
@@ -115,4 +115,22 @@ body {
 
 .overlay.show {
   display: flex;
+}
+
+.top-border {
+  height: 1px;
+  background-color: #666;
+  margin-bottom: 10px;
+}
+
+.sidebar-separator {
+  width: 1px;
+  background-color: #000;
+  margin-right: 20px;
+}
+
+.category-title {
+  font-size: 18px;
+  margin-top: 40px;
+  font-weight: 600;
 }
