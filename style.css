@@ -598,3 +598,27 @@ body.light-mode .review-text { border-color: #888; }
     margin: 0 auto 6px;
   }
 }
+
+/* Terms modal bigger layout */
+.terms-content {
+  max-width: 980px;
+  width: 92vw;
+  max-height: 80vh;
+  overflow: hidden;
+}
+.terms-content .terms-body {
+  margin-top: 8px;
+  overflow: auto;
+  max-height: calc(80vh - 80px);
+}
+.terms-content h2 {
+  margin: 0 0 8px 0;
+}
+.terms-content h3 {
+  margin: 14px 0 6px 0;
+}
+
+/* Swap logos per theme */
+.roblox-logo--light { display: none; }
+body.light-mode .roblox-logo--dark { display: none; }
+body.light-mode .roblox-logo--light { display: block; }

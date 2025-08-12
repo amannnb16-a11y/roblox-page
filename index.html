@@ -9,7 +9,8 @@
 </head>
 <body>
   <div class="topnav">
-    <img src="roblox-logo.png" alt="Roblox Logo" class="roblox-logo"/>
+    <img src="roblox-logo.png" alt="Roblox Logo" class="roblox-logo roblox-logo--dark"/>
+    <img src="roblox-logo.png" alt="Roblox Logo" class="roblox-logo roblox-logo--light"/>
     <div class="nav-links">
       <span class="nav-item" role="button" tabindex="0">Charts</span>
       <span class="nav-item" role="button" tabindex="0">Marketplace</span>
@@ -23,6 +24,7 @@
   <div class="layout">
     <aside class="sidebar">
       <button onclick="showContact()">Contact</button>
+      <button onclick="showTerms()">T&amp;C</button>
       <button onclick="toggleLightMode()">Light Mode Toggle</button>
     </aside>
     <div class="sidebar-separator"></div>
@@ -230,6 +232,33 @@
           <div class="review-username" id="reviewTitle">username’s review:</div>
           <div class="review-text">This is a placeholder review. Add a <code>data-review</code> attribute to a profile card to customize.</div>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Terms & Conditions Modal -->
+  <div class="modal" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+    <div class="modal-content terms-content" role="document">
+      <button class="close-btn" onclick="closeTerms()" aria-label="Close terms modal">✕</button>
+      <h2 id="termsTitle">Terms &amp; Conditions</h2>
+      <div class="terms-body">
+        <p><em>Placeholder text:</em> Add your project scope, payment schedule, revision policy, usage rights, and delivery timelines here. I set this modal larger for comfortable reading.</p>
+        <h3>Scope &amp; Revisions</h3>
+        <ul>
+          <li>Initial concept + up to 2 revision rounds included.</li>
+          <li>Additional revisions billed at an agreed hourly/day rate.</li>
+        </ul>
+        <h3>Payment</h3>
+        <ul>
+          <li>50% deposit to start, balance on delivery unless otherwise agreed.</li>
+          <li>Rush fees may apply for expedited timelines.</li>
+        </ul>
+        <h3>Usage Rights</h3>
+        <ul>
+          <li>Final files licensed for the agreed use (social, print, merch, etc.).</li>
+          <li>Source files may be provided upon request per separate fee/terms.</li>
+        </ul>
       </div>
     </div>
   </div>

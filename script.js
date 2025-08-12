@@ -125,12 +125,8 @@ function setupReviewOpeners() {
 }
 
 // Global ESC handler
-function handleGlobalEsc(e) {
-  if (e.key === 'Escape') {
-    hideOverlay();
-    closeContact();
-    closeReview();
-  }
+\1
+    closeTerms();}
 }
 
 // DOM Ready
@@ -143,3 +139,28 @@ document.addEventListener('DOMContentLoaded', function() {
   setupReviewOpeners();
 });
 document.addEventListener('keydown', handleGlobalEsc);
+
+
+function showTerms() {
+  var modal = document.getElementById('termsModal');
+  var blur = document.getElementById('pageBlur');
+  if (blur) blur.classList.add('show');
+  if (modal) modal.classList.add('show');
+}
+function closeTerms() {
+  var modal = document.getElementById('termsModal');
+  var blur = document.getElementById('pageBlur');
+  if (modal) modal.classList.remove('show');
+  if (blur) blur.classList.remove('show');
+}
+
+
+function setupTermsOutsideClick() {
+  var modal = document.getElementById('termsModal');
+  if (!modal) return;
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeTerms();
+  });
+}
+document.addEventListener('DOMContentLoaded', setupTermsOutsideClick);
+
