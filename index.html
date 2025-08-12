@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roblox Recommended</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="topnav">
+    <img src="roblox-logo.png" alt="Roblox Logo" class="roblox-logo"/>
+    <div class="nav-links">
+      <a href="#">Charts</a>
+      <a href="#">Marketplace</a>
+      <a href="#">Create</a>
+      <a href="#">Robux</a>
+    </div>
+    <div class="profile-icon">🙂</div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <button>Orders</button>
+      <button>Passwords</button>
+      <button>Settings</button>
+    </aside>
+
+    <main class="main-content">
+      <h2>Recommended For You</h2>
+      <div class="grid">
+        <!-- Repeat for 9 games -->
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game1.jpg" alt="Game 1"/>
+          <div class="info">
+            <div class="rating">👍 71% Rating</div>
+          </div>
+        </div>
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game2.jpg" alt="Game 2"/>
+          <div class="info">
+            <div class="rating">👍 72% Rating</div>
+          </div>
+        </div>
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game3.jpg" alt="Game 3"/>
+          <div class="info">
+            <div class="rating">👍 73% Rating</div>
+          </div>
+        </div>
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game4.jpg" alt="Game 4"/>
+          <div class="info">
+            <div class="rating">👍 74% Rating</div>
+          </div>
+        </div>
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game5.jpg" alt="Game 5"/>
+          <div class="info">
+            <div class="rating">👍 75% Rating</div>
+          </div>
+        </div>
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game6.jpg" alt="Game 6"/>
+          <div class="info">
+            <div class="rating">👍 76% Rating</div>
+          </div>
+        </div>
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game7.jpg" alt="Game 7"/>
+          <div class="info">
+            <div class="rating">👍 77% Rating</div>
+          </div>
+        </div>
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game8.jpg" alt="Game 8"/>
+          <div class="info">
+            <div class="rating">👍 78% Rating</div>
+          </div>
+        </div>
+
+        <div class="game" onclick="expandImage(this)">
+          <img src="game9.jpg" alt="Game 9"/>
+          <div class="info">
+            <div class="rating">👍 79% Rating</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="hideOverlay()">
+    <img id="overlayImg" src="">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
