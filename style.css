@@ -342,7 +342,72 @@ body.light-mode .sidebar button {
 }
 
 
-/* Smooth transitions for color/background */
-body, .topnav, .sidebar, .game, .icon-game, .info, .rating, .nav-links .nav-item {
-  transition: background-color 0.4s ease, color 0.4s ease;
+.profile-section {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px 0 10px;
+  flex-wrap: wrap;
+}
+
+.profile-card {
+  text-align: center;
+  color: white;
+}
+
+body.light-mode .profile-card {
+  color: black;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto 8px;
+  background-color: #333;
+}
+
+body.light-mode .profile-pic {
+  background-color: #cccccc;
+}
+
+.username {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.speechbox {
+  background: rgba(0,0,0,0.6);
+  padding: 6px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+body.light-mode .speechbox {
+  background: rgba(255,255,255,0.6);
+}
+
+.star {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-color: #999;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L24 9.168l-6 5.843 1.417 8.259L12 18.896l-7.417 4.374L6 15.011 0 9.168l8.332-1.15L12 .587z"/></svg>') no-repeat center;
+  mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L24 9.168l-6 5.843 1.417 8.259L12 18.896l-7.417 4.374L6 15.011 0 9.168l8.332-1.15L12 .587z"/></svg>') no-repeat center;
+  background-size: contain;
+  margin: 0 1px;
+}
+
+.star.full {
+  background-color: gold;
+}
+
+.star.half {
+  background: linear-gradient(to right, gold 50%, #999 50%);
+}
+
+.star.empty {
+  background-color: #999;
 }
