@@ -12,7 +12,6 @@
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s;
-  width: 100%;
   aspect-ratio: 1 / 1;
 }
 

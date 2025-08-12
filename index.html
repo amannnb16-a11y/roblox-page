@@ -8,48 +8,63 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2>Icons</h2>
-  <div class="icon-grid">
-
-    <div class="icon-game" onclick="expandImage(this)">
-      <img src="game1.jpg" alt="Icon Game 1">
-      <div class="info">👍 85% Rating</div>
+  <div class="topnav">
+    <img src="roblox-logo.png" alt="Roblox Logo" class="roblox-logo"/>
+    <div class="nav-links">
+      <span>Charts</span>
+      <span>Marketplace</span>
+      <span>Create</span>
+      <span>Robux</span>
     </div>
+    <div class="profile-icon">🙂</div>
+  </div>
+  <div class="top-border"></div>
 
-    <div class="icon-game" onclick="expandImage(this)">
-      <img src="game2.jpg" alt="Icon Game 2">
-      <div class="info">👍 86% Rating</div>
-    </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <button>Orders</button>
+      <button>Passwords</button>
+      <button>Settings</button>
+    </aside>
+    <div class="sidebar-separator"></div>
 
-    <div class="icon-game" onclick="expandImage(this)">
-      <img src="game3.jpg" alt="Icon Game 3">
-      <div class="info">👍 87% Rating</div>
-    </div>
+    <main class="main-content">
+      <h2>Recommended For You</h2>
 
-    <div class="icon-game" onclick="expandImage(this)">
-      <img src="game4.jpg" alt="Icon Game 4">
-      <div class="info">👍 88% Rating</div>
-    </div>
+      <div class="subcategory-title">Recently Played by Others</div>
+      <div class="icon-grid">
 
-    <div class="icon-game" onclick="expandImage(this)">
-      <img src="game5.jpg" alt="Icon Game 5">
-      <div class="info">👍 89% Rating</div>
-    </div>
+        <div class="icon-game" onclick="expandImage(this)">
+          <img src="game1.jpg" alt="Icon Game 1"/>
+          <div class="info">👍 85% Rating</div>
+        </div>
 
-    <div class="icon-game" onclick="expandImage(this)">
-      <img src="game6.jpg" alt="Icon Game 6">
-      <div class="info">👍 90% Rating</div>
-    </div>
+        <div class="icon-game" onclick="expandImage(this)">
+          <img src="game2.jpg" alt="Icon Game 2"/>
+          <div class="info">👍 86% Rating</div>
+        </div>
 
-    <div class="icon-game" onclick="expandImage(this)">
-      <img src="game7.jpg" alt="Icon Game 7">
-      <div class="info">👍 91% Rating</div>
-    </div>
+        <div class="icon-game" onclick="expandImage(this)">
+          <img src="game3.jpg" alt="Icon Game 3"/>
+          <div class="info">👍 87% Rating</div>
+        </div>
 
-    <div class="icon-game" onclick="expandImage(this)">
-      <img src="game8.jpg" alt="Icon Game 8">
-      <div class="info">👍 92% Rating</div>
-    </div>
+        <div class="icon-game" onclick="expandImage(this)">
+          <img src="game4.jpg" alt="Icon Game 4"/>
+          <div class="info">👍 88% Rating</div>
+        </div>
+
+        <div class="icon-game" onclick="expandImage(this)">
+          <img src="game5.jpg" alt="Icon Game 5"/>
+          <div class="info">👍 89% Rating</div>
+        </div>
+
+        <div class="icon-game" onclick="expandImage(this)">
+          <img src="game6.jpg" alt="Icon Game 6"/>
+          <div class="info">👍 90% Rating</div>
+        </div>
+      </div>
+    </main>
   </div>
 
   <div class="overlay" id="overlay" onclick="hideOverlay()">
