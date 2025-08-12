@@ -1,5 +1,4 @@
 
-/* BASE STYLES preserved */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -153,272 +152,23 @@ body {
   background-color: #2c2c2c;
 }
 
-/* Light mode overrides */
-body.light-mode {
-  background-color: #ffffff;
-  color: #000;
-}
-
-body.light-mode .topnav {
-  background-color: #e6e6e6;
-}
-
-body.light-mode .sidebar {
-  background-color: #e6e6e6;
-  color: #000;
-}
-
-body.light-mode .top-border {
-  background-color: royalblue;
-}
-
-body.light-mode .sidebar-separator {
-  background-color: black;
-}
-
-body.light-mode .nav-links .nav-item {
-  color: #000;
-}
-
-body.light-mode .icon-game .info,
-body.light-mode .game .info,
-body.light-mode .rating {
-  color: #000;
-}
-
-body.light-mode .game,
-body.light-mode .icon-game {
-  background-color: #f2f2f2 !important;
-}
-
-/* Contact Modal */
-.modal {
+.overlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9);
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.5);
-  z-index: 1001;
-  width: 100%;
-  height: 100%;
+  z-index: 1000;
 }
 
-.modal.show {
-  display: flex;
-}
-
-.modal-content {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 320px;
-  text-align: center;
-  color: black;
-  position: relative;
-  z-index: 1002;
-}
-
-.modal-content h2 {
-  margin-top: 0;
-}
-
-.modal-content .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-/* Blur background */
-.blurred {
-  filter: blur(6px);
-}
-
-
-/* Ensure modal is never blurred */
-#contactModal {
-  z-index: 1002;
-}
-
-#contactModal .modal-content {
-  filter: none !important;
-  backdrop-filter: none !important;
-}
-
-body.light-mode .sidebar button {
-  background: #e6e6e6;
-  color: #000;
-}
-
-/* Reintroduce modal styling */
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.5);
-  z-index: 1001;
-  width: 100%;
-  height: 100%;
-}
-
-.modal.show {
-  display: flex;
-}
-
-.modal-content {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 320px;
-  text-align: center;
-  color: black;
-  position: relative;
-  z-index: 1002;
-}
-
-.modal-content h2 {
-  margin-top: 0;
-}
-
-.modal-content .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-/* Ensure modal not blurred */
-#contactModal .modal-content {
-  filter: none !important;
-  backdrop-filter: none !important;
-}
-
-
-body.light-mode .icon-game {
-  background-color: #f2f2f2 !important;
-}
-
-body.light-mode .icon-game .info {
-  background-color: #f2f2f2 !important;
-}
-
-.homepage-banner {
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-.banner-img {
-  width: 100%;
-  height: auto;
-  max-height: 200px;
-  object-fit: cover;
+.overlay img {
+  max-width: 90%;
+  max-height: 90%;
   border-radius: 10px;
 }
 
-
-.sidebar button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  padding: 10px 0;
-  border-bottom: 2px solid #999999;
-  text-align: left;
-  cursor: pointer;
-}
-
-body.light-mode .sidebar button {
-  color: black;
-  border-bottom: 2px solid #999999;
-}
-
-
-.profile-section {
+.overlay.show {
   display: flex;
-  justify-content: center;
-  gap: 40px;
-  padding: 30px 0 10px;
-  flex-wrap: wrap;
-}
-
-.profile-card {
-  text-align: center;
-  color: white;
-}
-
-body.light-mode .profile-card {
-  color: black;
-}
-
-.profile-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  margin: 0 auto 8px;
-  background-color: #333;
-}
-
-body.light-mode .profile-pic {
-  background-color: #cccccc;
-}
-
-.username {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-.speechbox {
-  background: rgba(0,0,0,0.6);
-  padding: 6px 10px;
-  border-radius: 20px;
-  display: inline-block;
-}
-
-body.light-mode .speechbox {
-  background: rgba(255,255,255,0.6);
-}
-
-.star {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background-color: #999;
-  -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L24 9.168l-6 5.843 1.417 8.259L12 18.896l-7.417 4.374L6 15.011 0 9.168l8.332-1.15L12 .587z"/></svg>') no-repeat center;
-  mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg"><path d="M12 .587l3.668 7.431L24 9.168l-6 5.843 1.417 8.259L12 18.896l-7.417 4.374L6 15.011 0 9.168l8.332-1.15L12 .587z"/></svg>') no-repeat center;
-  background-size: contain;
-  margin: 0 1px;
-}
-
-.star.full {
-  background-color: gold;
-}
-
-.star.half {
-  background: linear-gradient(to right, gold 50%, #999 50%);
-}
-
-.star.empty {
-  background-color: #999;
-}
-
-
-/* ENFORCED light mode visible speechbox styling */
-body.light-mode .speechbox {
-  background-color: #e6e6e6 !important;
-  padding: 8px 14px;
-  border-radius: 20px;
-  display: inline-flex;
-  justify-content: center;
-  gap: 3px;
 }
