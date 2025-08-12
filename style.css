@@ -134,3 +134,17 @@ body {
   margin-top: 40px;
   font-weight: 600;
 }
+
+.nav-links span {
+  margin: 0 20px;
+  color: #fff;
+  font-weight: 500;
+  pointer-events: none;
+  cursor: default;
+}
+
+.subcategory-title {
+  font-size: 18px;
+  margin-top: 30px;
+  font-weight: 500;
+}
