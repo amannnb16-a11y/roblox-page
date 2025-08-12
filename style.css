@@ -323,3 +323,20 @@ body.light-mode .icon-game .info {
   object-fit: cover;
   border-radius: 10px;
 }
+
+
+.sidebar button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 10px 0;
+  border-bottom: 2px solid #999999;
+  text-align: left;
+  cursor: pointer;
+}
+
+body.light-mode .sidebar button {
+  color: black;
+  border-bottom: 2px solid #999999;
+}
