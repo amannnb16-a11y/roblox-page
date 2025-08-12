@@ -50,14 +50,14 @@ body {
 }
 
 .sidebar {
-  width: 240px;
-  background-color: #2a2a2a;
-  padding: 16px 12px;
+  background: #2a2a2a;
+  color: white;
+  padding: 10px;
+  width: 180px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  height: 100vh;
+  gap: 10px;
+  height: calc(100vh - 36px);
 }
 
 .sidebar button {
@@ -164,14 +164,8 @@ body.light-mode .topnav {
 }
 
 body.light-mode .sidebar {
-  width: 240px;
-  background-color: #2a2a2a;
-  padding: 16px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  height: 100vh;
+  background-color: #e6e6e6;
+  color: #000;
 }
 
 body.light-mode .top-border {
@@ -366,8 +360,8 @@ body.light-mode .profile-card {
 }
 
 .profile-pic {
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
@@ -376,13 +370,7 @@ body.light-mode .profile-card {
 }
 
 body.light-mode .profile-pic {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  margin: 0 auto 8px;
-  background-color: #333;
+  background-color: #cccccc;
 }
 
 .username {
@@ -422,4 +410,15 @@ body.light-mode .speechbox {
 
 .star.empty {
   background-color: #999;
+}
+
+
+/* ENFORCED light mode visible speechbox styling */
+body.light-mode .speechbox {
+  background-color: #e6e6e6 !important;
+  padding: 8px 14px;
+  border-radius: 20px;
+  display: inline-flex;
+  justify-content: center;
+  gap: 3px;
 }
