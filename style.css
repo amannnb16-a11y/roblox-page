@@ -150,3 +150,10 @@ body.light-mode .review-avatar{ background-color:#cfcfcf; color:#333; border-col
 /* Utilities */
 .hidden{display:none}
 a{color:inherit}
+
+/* Light mode: make the star bar a bit darker for contrast */
+body.light-mode .profile-card .speechbox{
+  background: #d9d9d9;       /* slightly darker than the page */
+  border-color: #c9c9c9;     /* subtle edge so stars pop */
+}
+
