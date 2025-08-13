@@ -157,3 +157,17 @@ body.light-mode .profile-card .speechbox{
   border-color: #c9c9c9;     /* subtle edge so stars pop */
 }
 
+/* Bigger stars without growing the pill */
+:root { --star-size: 16px; }   /* try 16–18px */
+
+.profile-card .speechbox {      /* keep the pill height about the same */
+  padding: 4px 10px;            /* was 6px 10px */
+}
+
+.profile-card .speechbox .star {
+  width: var(--star-size);
+  height: var(--star-size);
+  margin: 0 1px;
+  vertical-align: middle;
+}
+
