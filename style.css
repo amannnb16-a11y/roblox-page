@@ -151,11 +151,6 @@ body.light-mode .review-avatar{ background-color:#cfcfcf; color:#333; border-col
 .hidden{display:none}
 a{color:inherit}
 
-/* Light mode: make the star bar a bit darker for contrast */
-body.light-mode .profile-card .speechbox{
-  background: #d9d9d9;       /* slightly darker than the page */
-  border-color: #c9c9c9;     /* subtle edge so stars pop */
-}
 
 /* Bigger stars without growing the pill */
 :root { --star-size: 16px; }   /* try 16–18px */
@@ -181,20 +176,11 @@ body.light-mode .profile-card .speechbox{
   }
 }
 
-/* Light mode: stronger contrast for stars */
-body.light-mode .profile-card .speechbox{
-  background: #d0d0d0;          /* darker than the page so stars stand out */
-  border-color: #bcbcbc;
-}
 
-/* Star colors tuned for contrast in light mode */
-body.light-mode .profile-card .speechbox .star{
-  background: #5f5f5f;          /* empty star gray (darker) */
-}
-body.light-mode .profile-card .speechbox .star.full{
-  background: #ffc107;          /* brighter yellow than #ffd348 */
-}
-body.light-mode .profile-card .speechbox .star.half{
-  background: linear-gradient(90deg, #ffc107 50%, #5f5f5f 50%);
-}
 
+
+/* Crisp 1px outline around masked stars in light mode (no overlay) */
+:root{
+  --star-stroke-w: 1px;                  /* thickness: 0.8–1.4px works well */
+  --star-stroke: rgba(0,0,0,.85);        /* outline color */
+}
