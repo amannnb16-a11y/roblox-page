@@ -171,8 +171,6 @@ body.light-mode .profile-card .speechbox{
   vertical-align: middle;
 }
 
-/* Remove the earlier ::before outline, if it exists */
-body.light-mode .profile-card .speechbox .star::before { content: none !important; }
 
 /* Clean thin outline around stars in light mode (no overlay) */
 body.light-mode .profile-card .speechbox .star {
