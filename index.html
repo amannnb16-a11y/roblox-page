@@ -1,210 +1,138 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Roblox Clone</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Indentina — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="topnav">
-    <img src="roblox-logo.png" alt="Roblox Logo" class="roblox-logo"/>
-    <div class="nav-links">
-      <span class="nav-item">Charts</span>
-      <span class="nav-item">Marketplace</span>
-      <span class="nav-item">Create</span>
-      <span class="nav-item">Robux</span>
+  <div id="pageBlur" class="backdrop"></div>
+
+  <header class="topnav">
+    <div class="brand">
+      <img src="/assets/img/ui/roblox-dark.png" alt="Roblox Logo" class="roblox-logo roblox-logo--dark">
+      <img src="/assets/img/ui/roblox-light.png" alt="Roblox Logo (Light)" class="roblox-logo roblox-logo--light">
+      <span class="site-title">Indentina</span>
     </div>
-    <div class="profile-icon">🙂</div>
-  </div>
-  <div class="top-border"></div>
+    <button class="nav-item" id="lightModeBtn" type="button" aria-pressed="false" title="Toggle Light Mode">Light Mode</button>
+  </header>
 
   <div class="layout">
     <aside class="sidebar">
-      <button onclick="location.href='contact.html'">Contact</button>
-      <button onclick="toggleLightMode()">Light Mode Toggle</button>
+      <button class="side-btn" id="contactBtn" type="button">Contact</button>
+      <button class="side-btn" id="termsBtn" type="button">T&amp;C</button>
     </aside>
-    <div class="sidebar-separator"></div>
 
-    <main class="main-content" id="mainContent">
-      
-<div class="profile-section">
-  <div class="profile-card">
-    <div class="profile-pic" style="background-image: url('profile1.jpg');"></div>
-    <div class="username">UserOne</div>
-    <div class="speechbox">
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star half"></span>
+    <main class="main">
+      <section class="section">
+        <h2 class="section-title">Recommended For You</h2>
+        <div class="grid" id="projectsGrid">
+          <!-- Example cards (replace images by uploading to /assets/img/projects/ and updating src) -->
+          <div class="game">
+            <div class="thumb"><img src="/assets/img/projects/example-1.webp" alt="Project 1" loading="lazy" decoding="async"></div>
+            <div class="info">
+              <div class="title">Example Project 1</div>
+              <div class="meta">Artwork</div>
+            </div>
+          </div>
+          <div class="game">
+            <div class="thumb"><img src="/assets/img/projects/example-2.webp" alt="Project 2" loading="lazy" decoding="async"></div>
+            <div class="info">
+              <div class="title">Example Project 2</div>
+              <div class="meta">Artwork</div>
+            </div>
+          </div>
+          <div class="game">
+            <div class="thumb"><img src="/assets/img/projects/example-3.webp" alt="Project 3" loading="lazy" decoding="async"></div>
+            <div class="info">
+              <div class="title">Example Project 3</div>
+              <div class="meta">Artwork</div>
+            </div>
+          </div>
+          <div class="game">
+            <div class="thumb"><img src="/assets/img/projects/example-4.webp" alt="Project 4" loading="lazy" decoding="async"></div>
+            <div class="info">
+              <div class="title">Example Project 4</div>
+              <div class="meta">Artwork</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">People’s Reviews</h2>
+        <div class="profile-section"></div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Popular Icons</h2>
+        <div class="icon-grid" id="iconsGrid">
+          <div class="icon-game">
+            <div class="thumb"><img src="/assets/img/icons/icon-1.webp" alt="Icon 1" loading="lazy" decoding="async"></div>
+            <div class="info"><div class="title">Icon 1</div></div>
+          </div>
+          <div class="icon-game">
+            <div class="thumb"><img src="/assets/img/icons/icon-2.webp" alt="Icon 2" loading="lazy" decoding="async"></div>
+            <div class="info"><div class="title">Icon 2</div></div>
+          </div>
+          <div class="icon-game">
+            <div class="thumb"><img src="/assets/img/icons/icon-3.webp" alt="Icon 3" loading="lazy" decoding="async"></div>
+            <div class="info"><div class="title">Icon 3</div></div>
+          </div>
+          <div class="icon-game">
+            <div class="thumb"><img src="/assets/img/icons/icon-4.webp" alt="Icon 4" loading="lazy" decoding="async"></div>
+            <div class="info"><div class="title">Icon 4</div></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Image overlay -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Large image preview">
+    <img id="overlayImg" alt="Preview">
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <div class="modal-content">
+      <button class="close-btn" data-close="contactModal" aria-label="Close contact modal">✕</button>
+      <h2 id="contactTitle">Contact Me</h2>
+      <p>Discord: <strong>indentina</strong></p>
+      <p>Twitter: <a href="https://x.com/indentina" target="_blank" rel="noopener">@indentina</a></p>
     </div>
   </div>
-  <div class="profile-card">
-    <div class="profile-pic" style="background-image: url('profile2.jpg');"></div>
-    <div class="username">UserTwo</div>
-    <div class="speechbox">
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star empty"></span>
-      <span class="star empty"></span>
+
+  <!-- Terms Modal -->
+  <div class="modal" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+    <div class="modal-content terms-content">
+      <button class="close-btn" data-close="termsModal" aria-label="Close terms modal">✕</button>
+      <h2 id="termsTitle">Terms &amp; Conditions</h2>
+      <div class="terms-body">
+        <p><em>Placeholder:</em> Add scope, revisions, payment, usage rights, timelines, and cancellation policy here.</p>
+      </div>
     </div>
   </div>
-  <div class="profile-card">
-    <div class="profile-pic" style="background-image: url('profile3.jpg');"></div>
-    <div class="username">UserThree</div>
-    <div class="speechbox">
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star half"></span>
-      <span class="star empty"></span>
-      <span class="star empty"></span>
+
+  <!-- Review Modal -->
+  <div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+    <div class="modal-content review-content">
+      <button class="close-btn" data-close="reviewModal" aria-label="Close review modal">✕</button>
+      <div class="review-layout">
+        <div class="review-avatar"></div>
+        <div class="review-panel">
+          <div class="review-stars" aria-label="User rating"></div>
+          <div class="review-username" id="reviewTitle">username’s review:</div>
+          <div class="review-text">—</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="profile-card">
-    <div class="profile-pic" style="background-image: url('profile4.jpg');"></div>
-    <div class="username">UserFour</div>
-    <div class="speechbox">
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star full"></span>
-    </div>
-  </div>
-  <div class="profile-card">
-    <div class="profile-pic" style="background-image: url('profile5.jpg');"></div>
-    <div class="username">UserFive</div>
-    <div class="speechbox">
-      <span class="star full"></span>
-      <span class="star full"></span>
-      <span class="star empty"></span>
-      <span class="star empty"></span>
-      <span class="star empty"></span>
-    </div>
-  </div>
-</div>
 
-<div class="homepage-banner">
-  <img src="logo-banner.jpg" alt="Home Banner" class="banner-img"/>
-</div>
-<h2>Recommended For You</h2>
-
-      <div class="subcategory-title">Popular with Anime</div>
-      <div class="grid"><div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/good_boy.webp" alt="Game 1" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 71% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/finale.webp" alt="Game 2" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 72% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/poggedw_logo.webp" alt="Game 3" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 73% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/naruto.webp" alt="Game 4" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 74% Rating</div></div>
-        </div>
-      </div>
-
-      <div class="subcategory-title">Games You Might Roleplay</div>
-      <div class="grid"><div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/8.webp" alt="Game 5" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 80% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/11_-_Copy.webp" alt="Game 6" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 81% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/1.webp" alt="Game 7" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 82% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/dojo_raw.webp" alt="Game 8" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 83% Rating</div></div>
-        </div>
-      </div>
-
-      <div class="subcategory-title">Game Ready Icons</div>
-      <div class="icon-grid"><div class="icon-game" onclick="expandImage(this)">
-          <img src="/assets/img/icons/icon_final.webp" alt="Icon Game 9" loading="lazy" decoding="async">
-          <div class="info">👍 89% Rating</div>
-        </div>
-<div class="icon-game" onclick="expandImage(this)">
-          <img src="/assets/img/icons/a.webp" alt="Icon Game 10" loading="lazy" decoding="async">
-          <div class="info">👍 90% Rating</div>
-        </div>
-<div class="icon-game" onclick="expandImage(this)">
-          <img src="/assets/img/icons/dddddddddddd.webp" alt="Icon Game 11" loading="lazy" decoding="async">
-          <div class="info">👍 91% Rating</div>
-        </div>
-<div class="icon-game" onclick="expandImage(this)">
-          <img src="/assets/img/icons/lmaooo.webp" alt="Icon Game 12" loading="lazy" decoding="async">
-          <div class="info">👍 92% Rating</div>
-        </div>
-<div class="icon-game" onclick="expandImage(this)">
-          <img src="/assets/img/icons/hjf.webp" alt="Icon Game 13" loading="lazy" decoding="async">
-          <div class="info">👍 93% Rating</div>
-        </div>
-<div class="icon-game" onclick="expandImage(this)">
-          <img src="/assets/img/icons/my_best_ever.webp" alt="Icon Game 14" loading="lazy" decoding="async">
-          <div class="info">👍 94% Rating</div>
-        </div>
-      </div>
-
-      <div class="category-title">Top Military</div>
-      <div class="grid"><div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/icons/waga.webp" alt="Trending Game 15" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 100% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/icons/war.webp" alt="Trending Game 16" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 101% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/gfd.webp" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 102% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/22.webp" alt="Trending Game 18" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 103% Rating</div></div>
-        </div>
-      </div>
-
-      <div class="category-title">And More</div>
-      <div class="grid"><div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/vcx.webp" alt="Upcoming Game 19" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 109% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/city.webp" alt="Upcoming Game 20" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 110% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="/assets/img/projects/Scythe.webp" alt="Upcoming Game 21" loading="lazy" decoding="async">
-          <div class="info"><div class="rating">👍 111% Rating</div></div>
-        </div>
-<div class="game" onclick="expandImage(this)">
-          <img src="game22.jpg" alt="Upcoming Game 22">
-          <div class="info"><div class="rating">👍 112% Rating</div></div>
-        </div>
-      </div>
-    
-
-            </main>
-        
-    
-  </div>
-
-  <div class="overlay" id="overlay" onclick="hideOverlay()">
-    <img id="overlayImg" src="">
-  </div>
-
-  <script src="script.js"></script>
+  <script src="script.js?v=cleanSlate1"></script>
 </body>
 </html>

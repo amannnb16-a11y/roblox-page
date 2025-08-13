@@ -2,224 +2,193 @@
   'use strict';
 
   // ---------- Helpers ----------
-  function qs(sel, root){ return (root||document).querySelector(sel); }
-  function qsa(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
-  function show(el){ if(el) el.classList.add('show'); }
-  function hide(el){ if(el) el.classList.remove('show'); }
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const show = el => el && el.classList.add('show');
+  const hide = el => el && el.classList.remove('show');
 
-  // ---------- Reviews from JSON ----------
-  // Escaping helpers (keep your page safe when inserting text)
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, m => (
       { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[m]
     ));
   }
-  function escapeAttr(s) { return String(s).replace(/"/g, "&quot;"); }
+  const escapeAttr = s => String(s).replace(/"/g, "&quot;");
 
-  // Build star icons (supports halves like 3.5)
+  function initialsFrom(name) {
+    const clean = String(name||"").replace(/[^A-Za-z0-9]+/g, " ").trim();
+    if (!clean) return "?";
+    const p = clean.split(" ").filter(Boolean);
+    return ((p[0]?.[0]||"") + (p.length>1 ? p[p.length-1][0] : "") || p[0]?.[0] || "?").toUpperCase();
+  }
+
   function starsHTML(value) {
-    const v = Number(value) || 0;
-    const out = [];
-    for (let i = 1; i <= 5; i++) {
-      const diff = v - (i - 1);
-      let cls = "empty";
-      if (diff >= 1) cls = "full";
-      else if (diff >= 0.5) cls = "half";
-      out.push(`<span class="star ${cls}"></span>`);
+    const v = Number(value)||0;
+    let out = "";
+    for (let i=1;i<=5;i++){
+      const diff = v - (i-1);
+      out += `<span class="star ${diff>=1?'full':diff>=0.5?'half':'empty'}"></span>`;
     }
-    return out.join("");
+    return out;
   }
 
-  // Make one profile card from a JSON record
-  function renderProfileCard(r) {
-    const avatar = r.avatar ? `background-image: url("${escapeAttr(r.avatar)}");` : "";
-    const review = r.review || "This user has not added a review yet.";
-    return `
-      <div class="profile-card" data-review="${escapeAttr(review)}">
-        <div class="profile-pic" style="${avatar}"></div>
-        <div class="username">${escapeHtml(r.username || "User")}</div>
-        <div class="speechbox">${starsHTML(r.rating)}</div>
-      </div>
-    `;
+  // ---------- Image overlay ----------
+  function expandImageFrom(el){
+    const img = el.querySelector('img');
+    if(!img) return;
+    const overlay = $('#overlay'), overlayImg = $('#overlayImg');
+    overlayImg.src = img.getAttribute('src');
+    show(overlay);
   }
+  function hideOverlay(){ hide($('#overlay')); }
 
-  // Fetch /assets/data/reviews.json and populate the strip
-  async function loadReviews() {
+  // ---------- Light mode with persistence ----------
+  function applyStoredTheme() {
     try {
-      const res = await fetch('/assets/data/reviews.json', { cache: 'no-cache' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-      const container = qs('.profile-section');
-      if (!container || !data || !Array.isArray(data.reviews)) return;
-
-      container.innerHTML = data.reviews.map(renderProfileCard).join('');
-      // After we inject new cards, attach click/keyboard handlers
-      setupReviewOpeners();
-    } catch (e) {
-      console.warn('reviews.json not loaded; using any hard-coded cards instead.', e);
-      // If JSON fails, we simply keep whatever is already in the HTML.
-    }
+      const v = localStorage.getItem('theme');
+      if (v === 'light') document.body.classList.add('light-mode');
+    } catch {}
+    const pressed = document.body.classList.contains('light-mode');
+    const btn = $('#lightModeBtn'); if (btn) btn.setAttribute('aria-pressed', String(pressed));
   }
-
-  // ---------- Overlay (image preview) ----------
-  function expandImage(el){
-    try {
-      var img = el.querySelector('img');
-      if(!img) return;
-      var overlay = qs('#overlay');
-      var overlayImg = qs('#overlayImg');
-      if(!overlay || !overlayImg) return;
-      overlayImg.src = img.src;
-      show(overlay);
-    } catch(e){ console.error('expandImage error', e); }
-  }
-  function hideOverlay(){
-    var overlay = qs('#overlay');
-    hide(overlay);
-  }
-
-  // ---------- Theme toggle ----------
   function toggleLightMode(){
-    hideOverlay();
-    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.toggle('light-mode');
+    try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch {}
+    const btn = $('#lightModeBtn'); if (btn) btn.setAttribute('aria-pressed', String(isLight));
   }
 
-  // ---------- Contact modal ----------
-  function showContact(){
-    hideOverlay();
-    var modal = qs('#contactModal');
-    var blur  = qs('#pageBlur');
-    show(blur); show(modal);
+  // ---------- Modals (Contact / Terms) ----------
+  function openModal(id){
+    show($('#pageBlur')); show($('#'+id));
   }
-  function closeContact(){
-    var modal = qs('#contactModal');
-    var blur  = qs('#pageBlur');
-    hide(modal); hide(blur);
+  function closeModal(id){
+    hide($('#'+id)); hide($('#pageBlur'));
   }
 
-  // ---------- Terms modal ----------
-  function showTerms(){
-    hideOverlay();
-    var modal = qs('#termsModal');
-    var blur  = qs('#pageBlur');
-    show(blur); show(modal);
-  }
-  function closeTerms(){
-    var modal = qs('#termsModal');
-    var blur  = qs('#pageBlur');
-    hide(modal); hide(blur);
-  }
-
-  // ---------- Review modal ----------
-  function openReview(cardEl){
-    hideOverlay();
-    var modal = qs('#reviewModal');
-    var blur  = qs('#pageBlur');
-    if(!modal) return;
-
-    var nameEl   = qs('.username', cardEl);
-    var username = nameEl ? nameEl.textContent.trim() : 'User';
-
-    var starsEl  = qs('.speechbox', cardEl);
-    var starsHTMLStr = starsEl ? starsEl.innerHTML : '';
-
-    var picEl    = qs('.profile-pic', cardEl);
-    var bg       = picEl ? (picEl.style.backgroundImage || '') : '';
-    var match    = bg.match(/url\(['"]?(.*?)['"]?\)/);
-    var avatarUrl= match ? match[1] : '';
-
-    var reviewText = cardEl.getAttribute('data-review') || 'This user has not added a review yet.';
-
-    var avatarNode = qs('.review-avatar', modal);
-    var starsNode  = qs('.review-stars', modal);
-    var userNode   = qs('.review-username', modal);
-    var textNode   = qs('.review-text', modal);
-
-    if(avatarNode) avatarNode.style.backgroundImage = avatarUrl ? "url('"+avatarUrl+"')" : '';
-    if(starsNode)  starsNode.innerHTML = starsHTMLStr;
-    if(userNode)   userNode.textContent = username + '’s review:';
-    if(textNode)   textNode.textContent = reviewText;
-
-    show(blur); show(modal);
-  }
-  function closeReview(){
-    var modal = qs('#reviewModal');
-    var blur  = qs('#pageBlur');
-    hide(modal); hide(blur);
+  // ---------- Reviews (JSON → 6 slots) ----------
+  function renderProfileCard(r){
+    const review   = r.review || '—';
+    const username = r.username || 'User';
+    const rating   = r.rating ?? 0;
+    const avatar   = (r.avatar||'').trim();
+    const styleBg  = avatar ? `style="background-image:url('${escapeAttr(avatar)}')"` : '';
+    const initials = avatar ? '' : `<span class="initials">${escapeHtml(initialsFrom(username))}</span>`;
+    return `
+      <div class="profile-card" data-review="${escapeAttr(review)}" data-username="${escapeAttr(username)}" data-avatar="${escapeAttr(avatar)}">
+        <div class="profile-pic" ${styleBg}>${initials}</div>
+        <div class="username">${escapeHtml(username)}</div>
+        <div class="speechbox">${starsHTML(rating)}</div>
+      </div>`;
   }
 
-  // ---------- Setup (runs once DOM is ready) ----------
-  function setupNavAccessibility(){
-    qsa('.nav-item[role="button"]').forEach(function(el){
-      el.addEventListener('keydown', function(e){
-        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); el.click(); }
-      });
-    });
-  }
-
-  function setupOverlayClose(){
-    var overlay = qs('#overlay');
-    if(!overlay) return;
-    overlay.addEventListener('click', function(){ hideOverlay(); });
-  }
-
-  function setupOutsideCloses(){
-    var c = qs('#contactModal');
-    if(c) c.addEventListener('click', function(e){ if(e.target === c) closeContact(); });
-    var t = qs('#termsModal');
-    if(t) t.addEventListener('click', function(e){ if(e.target === t) closeTerms(); });
-    var r = qs('#reviewModal');
-    if(r) r.addEventListener('click', function(e){ if(e.target === r) closeReview(); });
-  }
-
-  function setupReviewOpeners(){
-    qsa('.profile-card').forEach(function(card){
-      var pic = qs('.profile-pic', card);
-      var target = pic || card;
-      target.setAttribute('role','button');
-      target.setAttribute('tabindex','0');
-      target.addEventListener('click', function(){ openReview(card); });
-      target.addEventListener('keydown', function(e){
-        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openReview(card); }
-      });
-    });
-  }
-
-  function handleGlobalEsc(e){
-    if(e.key === 'Escape'){
-      hideOverlay();
-      closeContact();
-      closeTerms();
-      closeReview();
+  async function loadReviews(){
+    try{
+      const res = await fetch('/assets/data/reviews.json', { cache: 'no-cache' });
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const data = await res.json();
+      const list = Array.isArray(data.reviews) ? data.reviews.slice(0,6) : [];
+      while (list.length < 6) list.push({ username:'Your Name', rating:0, review:'Add yours soon!' });
+      const container = $('.profile-section');
+      if(!container) return;
+      container.innerHTML = list.map(renderProfileCard).join('');
+    }catch(err){
+      console.warn('Failed to load reviews.json; leaving any existing cards.', err);
     }
   }
 
-  function init(){
-    setupNavAccessibility();
-    setupOverlayClose();
-    setupOutsideCloses();
+  // ---------- Review modal open ----------
+  function openReview(card){
+    hideOverlay();
+    const modal = $('#reviewModal'), blur = $('#pageBlur');
+    const username = card.dataset.username || card.querySelector('.username')?.textContent?.trim() || 'User';
+    const reviewText = card.getAttribute('data-review') || '—';
+    const starsHTMLStr = card.querySelector('.speechbox')?.innerHTML || '';
 
-    // ← THIS is the new line that loads /assets/data/reviews.json
+    // avatar
+    const avatarNode = modal.querySelector('.review-avatar');
+    const bg = getComputedStyle(card.querySelector('.profile-pic')).backgroundImage || '';
+    const m = bg.match(/url\(["']?(.*?)["']?\)/);
+    const avatarUrl = m ? m[1] : '';
+
+    avatarNode.style.backgroundImage = '';
+    avatarNode.innerHTML = '';
+    if (avatarUrl) {
+      avatarNode.style.backgroundImage = "url('"+avatarUrl+"')";
+      avatarNode.classList.add('has-avatar');
+    } else {
+      avatarNode.classList.remove('has-avatar');
+      avatarNode.innerHTML = `<span class="initials">${escapeHtml(initialsFrom(username))}</span>`;
+    }
+
+    modal.querySelector('.review-stars').innerHTML = starsHTMLStr;
+    modal.querySelector('.review-username').textContent = `${username}’s review:`;
+    modal.querySelector('.review-text').textContent = reviewText;
+
+    show(blur); show(modal);
+  }
+
+  // ---------- Global init ----------
+  function init(){
+    applyStoredTheme();
+
+    // clicks
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+
+      // Light mode
+      if (t.closest('#lightModeBtn')) { toggleLightMode(); return; }
+
+      // Sidebar buttons
+      if (t.closest('#contactBtn')) { openModal('contactModal'); return; }
+      if (t.closest('#termsBtn'))   { openModal('termsModal'); return; }
+
+      // Close buttons
+      const closeAttr = t.closest('[data-close]')?.getAttribute('data-close');
+      if (closeAttr) { closeModal(closeAttr); return; }
+
+      // Overlay click to close
+      if (t.closest('#overlay')) { hideOverlay(); return; }
+
+      // Expand image from game/icon cards
+      const gameThumb = t.closest('.game .thumb, .icon-game .thumb');
+      if (gameThumb) { expandImageFrom(gameThumb); return; }
+
+      // Open review from profile-card
+      const card = t.closest('.profile-card');
+      if (card) { openReview(card); return; }
+    });
+
+    // Close modals on outside click
+    ['contactModal','termsModal','reviewModal'].forEach(id => {
+      const el = $('#'+id);
+      if (!el) return;
+      el.addEventListener('click', (ev) => { if (ev.target === el) closeModal(id); });
+    });
+
+    // ESC closes everything
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        hideOverlay();
+        closeModal('contactModal');
+        closeModal('termsModal');
+        closeModal('reviewModal');
+      }
+    });
+
+    // Load reviews
     loadReviews();
 
-    document.addEventListener('keydown', handleGlobalEsc);
+    // Resilient image error fallback (SVG placeholder)
+    const fallback = "data:image/svg+xml;utf8," +
+      "<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'>" +
+      "<rect width='100%' height='100%' fill='%23cccccc'/>" +
+      "<text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-size='24' font-family='Inter,sans-serif'>Image not found</text>" +
+      "</svg>";
+    $$('#projectsGrid img, #iconsGrid img').forEach(img => {
+      img.addEventListener('error', () => { img.src = fallback; });
+    });
   }
 
-  // Run when DOM ready
-  if(document.readyState === 'loading'){
+  if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
-  }else{
-    init();
-  }
-
-  // Expose globals for inline onclick=... in HTML
-  window.expandImage    = expandImage;
-  window.hideOverlay    = hideOverlay;
-  window.toggleLightMode= toggleLightMode;
-  window.showContact    = showContact;
-  window.closeContact   = closeContact;
-  window.showTerms      = showTerms;
-  window.closeTerms     = closeTerms;
-  window.openReview     = openReview;
-  window.closeReview    = closeReview;
+  } else { init(); }
 })();
