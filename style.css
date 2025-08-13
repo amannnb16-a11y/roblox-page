@@ -181,6 +181,6 @@ a{color:inherit}
 
 /* Crisp 1px outline around masked stars in light mode (no overlay) */
 :root{
-  --star-stroke-w: 1px;                  /* thickness: 0.8–1.4px works well */
+  --star-stroke-w: 20px;                  /* thickness: 0.8–1.4px works well */
   --star-stroke: rgba(0,0,0,.85);        /* outline color */
 }
