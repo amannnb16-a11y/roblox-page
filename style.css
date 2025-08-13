@@ -179,8 +179,10 @@ a{color:inherit}
 
 
 
-/* Crisp 1px outline around masked stars in light mode (no overlay) */
-:root{
-  --star-stroke-w: 20px;                  /* thickness: 0.8–1.4px works well */
-  --star-stroke: rgba(0,0,0,.85);        /* outline color */
-}
+/* Lock page scroll when any modal is open */
+body.modal-open { overflow: hidden; }
+
+/* Single scrollbar inside the T&C only */
+.modal .modal-content { overflow: hidden; }  /* was auto */
+.terms-body { max-height: calc(80vh - 70px); overflow: auto; }  /* keep content scroll here */
+
