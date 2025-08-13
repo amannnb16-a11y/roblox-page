@@ -172,18 +172,11 @@ body.light-mode .profile-card .speechbox{
 }
 
 
-/* Clean thin outline around stars in light mode (no overlay) */
-body.light-mode .profile-card .speechbox .star { position: relative; z-index: 1; }
-body.light-mode .profile-card .speechbox .star::before {
-  content: "";
-  position: absolute;
-  inset: -1px;               /* outline thickness */
-  background: #000;
-  -webkit-mask: inherit; mask: inherit;
-  opacity: .75;
-  pointer-events: none;
-  z-index: 0;                /* <-- behind the yellow fill */
+/* Optional: nudge the pill a hair darker so contrast improves further */
+body.light-mode .profile-card .speechbox{
+  background:#d6d6d6; /* try #d4d4d4 for stronger contrast, #dadada for lighter */
 }
+
 
 
 
@@ -192,5 +185,30 @@ body.light-mode .profile-card .speechbox .star::before {
   body.light-mode .profile-card .speechbox .star{
     filter: drop-shadow(0 0 0.8px rgba(0,0,0,.9));
   }
+}
+
+/* Crisp 1px outline around masked stars in light mode (no overlay) */
+:root{
+  --star-stroke-w: 1px;                  /* thickness: 0.8–1.4px works well */
+  --star-stroke: rgba(0,0,0,.85);        /* outline color */
+}
+
+body.light-mode .profile-card .speechbox .star{
+  /* four 0-blur shadows to simulate a sharp stroke */
+  filter:
+    drop-shadow(var(--star-stroke-w) 0 0 var(--star-stroke))
+    drop-shadow(calc(-1 * var(--star-stroke-w)) 0 0 var(--star-stroke))
+    drop-shadow(0 var(--star-stroke-w) 0 var(--star-stroke))
+    drop-shadow(0 calc(-1 * var(--star-stroke-w)) 0 var(--star-stroke));
+  -webkit-filter:
+    drop-shadow(var(--star-stroke-w) 0 0 var(--star-stroke))
+    drop-shadow(calc(-1 * var(--star-stroke-w)) 0 0 var(--star-stroke))
+    drop-shadow(0 var(--star-stroke-w) 0 var(--star-stroke))
+    drop-shadow(0 calc(-1 * var(--star-stroke-w)) 0 var(--star-stroke));
+}
+
+/* Optional: nudge the pill a hair darker so contrast improves further */
+body.light-mode .profile-card .speechbox{
+  background:#d6d6d6; /* try #d4d4d4 for stronger contrast, #dadada for lighter */
 }
 
