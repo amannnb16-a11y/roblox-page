@@ -171,3 +171,26 @@ body.light-mode .profile-card .speechbox{
   vertical-align: middle;
 }
 
+/* Light mode: add a thin black outline around stars for contrast */
+body.light-mode .profile-card .speechbox .star{
+  position: relative;           /* create a positioning context */
+}
+
+body.light-mode .profile-card .speechbox .star::before{
+  content: "";
+  position: absolute;
+  inset: -1px;                  /* stroke thickness (try -1.25px if you want slightly thicker) */
+  background: #000;             /* outline color */
+  -webkit-mask: inherit;        /* reuse the same star mask */
+  mask: inherit;
+  opacity: .75;                 /* soften the outline a bit */
+  pointer-events: none;
+}
+
+/* Fallback for older browsers that ignore mask:inherit */
+@supports not (mask: inherit){
+  body.light-mode .profile-card .speechbox .star{
+    filter: drop-shadow(0 0 0.8px rgba(0,0,0,.9));
+  }
+}
+
