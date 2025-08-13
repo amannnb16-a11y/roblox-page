@@ -198,5 +198,21 @@
   </div>
 
   <script src="script.js?v=cleanSlate1"></script>
+
+  <script>
+    // Force DARK as the default on every load (no preference saved)
+    (function () {
+      try { localStorage.removeItem('theme'); } catch (e) {}
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setDark);
+      } else { setDark(); }
+      function setDark(){
+        document.body.classList.remove('light-mode'); // dark mode baseline
+        var btn = document.getElementById('lightModeBtn');
+        if (btn) btn.setAttribute('aria-pressed','false');
+      }
+    })();
+  </script>
+
 </body>
 </html>
