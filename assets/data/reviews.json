@@ -1,1 +1,35 @@
+{
+  "reviews": [
+    {
+      "username": "@MatiasGrief",
+      "avatar": "/assets/img/profiles/user-one.webp",
+      "rating": 5,
+      "review": "\"This so bussin, he the only one I want 😍.\""
+    },
+    {
+      "username": "@RockysValor",
+      "avatar": "/assets/img/profiles/user-two.webp",
+      "rating": 5,
+      "review": "His talents and services are worth every penny. A truly amazing person."
+    },
+    {
+      "username": "UserThree",
+      "avatar": "/assets/img/profiles/user-three.webp",
+      "rating": 3,
+      "review": "Good communication."
+    },
+    {
+      "username": "UserFour",
+      "avatar": "/assets/img/profiles/user-four.webp",
+      "rating": 5,
+      "review": "Five stars, would hire again!"
+    },
+    {
+      "username": "UserFive",
+      "avatar": "/assets/img/profiles/user-five.webp",
+      "rating": 2,
+      "review": "Delivered as promised."
+    }
+  ]
+}
 
