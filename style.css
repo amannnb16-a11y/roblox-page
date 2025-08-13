@@ -173,9 +173,18 @@ body.light-mode .profile-card .speechbox{
 
 
 /* Clean thin outline around stars in light mode (no overlay) */
-body.light-mode .profile-card .speechbox .star {
-  filter: drop-shadow(0 0 0.9px rgba(0,0,0,.85));
+body.light-mode .profile-card .speechbox .star { position: relative; z-index: 1; }
+body.light-mode .profile-card .speechbox .star::before {
+  content: "";
+  position: absolute;
+  inset: -1px;               /* outline thickness */
+  background: #000;
+  -webkit-mask: inherit; mask: inherit;
+  opacity: .75;
+  pointer-events: none;
+  z-index: 0;                /* <-- behind the yellow fill */
 }
+
 
 
 /* Fallback for older browsers that ignore mask:inherit */
