@@ -172,12 +172,6 @@ body.light-mode .profile-card .speechbox{
 }
 
 
-/* Optional: nudge the pill a hair darker so contrast improves further */
-body.light-mode .profile-card .speechbox{
-  background:#d6d6d6; /* try #d4d4d4 for stronger contrast, #dadada for lighter */
-}
-
-
 
 
 /* Fallback for older browsers that ignore mask:inherit */
@@ -187,4 +181,20 @@ body.light-mode .profile-card .speechbox{
   }
 }
 
+/* Light mode: stronger contrast for stars */
+body.light-mode .profile-card .speechbox{
+  background: #d0d0d0;          /* darker than the page so stars stand out */
+  border-color: #bcbcbc;
+}
+
+/* Star colors tuned for contrast in light mode */
+body.light-mode .profile-card .speechbox .star{
+  background: #5f5f5f;          /* empty star gray (darker) */
+}
+body.light-mode .profile-card .speechbox .star.full{
+  background: #ffc107;          /* brighter yellow than #ffd348 */
+}
+body.light-mode .profile-card .speechbox .star.half{
+  background: linear-gradient(90deg, #ffc107 50%, #5f5f5f 50%);
+}
 
