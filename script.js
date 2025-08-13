@@ -183,7 +183,7 @@
       "<rect width='100%' height='100%' fill='%23cccccc'/>" +
       "<text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23666' font-size='24' font-family='Inter,sans-serif'>Image not found</text>" +
       "</svg>";
-    $$('#projectsGrid img, #iconsGrid img').forEach(img => {
+    $$('#projectsGrid img, #iconsGrid img, #moreGrid img').forEach(img => {
       img.addEventListener('error', () => { img.src = fallback; });
     });
   }
