@@ -58,11 +58,16 @@
 
   // ---------- Modals (Contact / Terms) ----------
   function openModal(id){
-    show($('#pageBlur')); show($('#'+id));
-  }
-  function closeModal(id){
-    hide($('#'+id)); hide($('#pageBlur'));
-  }
+  show($('#pageBlur'));
+  show($('#'+id));
+  document.body.classList.add('modal-open');   // <— lock background scroll
+}
+function closeModal(id){
+  hide($('#'+id));
+  hide($('#pageBlur'));
+  document.body.classList.remove('modal-open'); // <— restore scroll
+}
+
 
   // ---------- Reviews (JSON → 6 slots) ----------
   function renderProfileCard(r){
