@@ -7,6 +7,60 @@
   function show(el){ if(el) el.classList.add('show'); }
   function hide(el){ if(el) el.classList.remove('show'); }
 
+  // ---------- Reviews from JSON ----------
+  // Escaping helpers (keep your page safe when inserting text)
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, m => (
+      { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[m]
+    ));
+  }
+  function escapeAttr(s) { return String(s).replace(/"/g, "&quot;"); }
+
+  // Build star icons (supports halves like 3.5)
+  function starsHTML(value) {
+    const v = Number(value) || 0;
+    const out = [];
+    for (let i = 1; i <= 5; i++) {
+      const diff = v - (i - 1);
+      let cls = "empty";
+      if (diff >= 1) cls = "full";
+      else if (diff >= 0.5) cls = "half";
+      out.push(`<span class="star ${cls}"></span>`);
+    }
+    return out.join("");
+  }
+
+  // Make one profile card from a JSON record
+  function renderProfileCard(r) {
+    const avatar = r.avatar ? `background-image: url("${escapeAttr(r.avatar)}");` : "";
+    const review = r.review || "This user has not added a review yet.";
+    return `
+      <div class="profile-card" data-review="${escapeAttr(review)}">
+        <div class="profile-pic" style="${avatar}"></div>
+        <div class="username">${escapeHtml(r.username || "User")}</div>
+        <div class="speechbox">${starsHTML(r.rating)}</div>
+      </div>
+    `;
+  }
+
+  // Fetch /assets/data/reviews.json and populate the strip
+  async function loadReviews() {
+    try {
+      const res = await fetch('/assets/data/reviews.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const container = qs('.profile-section');
+      if (!container || !data || !Array.isArray(data.reviews)) return;
+
+      container.innerHTML = data.reviews.map(renderProfileCard).join('');
+      // After we inject new cards, attach click/keyboard handlers
+      setupReviewOpeners();
+    } catch (e) {
+      console.warn('reviews.json not loaded; using any hard-coded cards instead.', e);
+      // If JSON fails, we simply keep whatever is already in the HTML.
+    }
+  }
+
   // ---------- Overlay (image preview) ----------
   function expandImage(el){
     try {
@@ -67,7 +121,7 @@
     var username = nameEl ? nameEl.textContent.trim() : 'User';
 
     var starsEl  = qs('.speechbox', cardEl);
-    var starsHTML= starsEl ? starsEl.innerHTML : '';
+    var starsHTMLStr = starsEl ? starsEl.innerHTML : '';
 
     var picEl    = qs('.profile-pic', cardEl);
     var bg       = picEl ? (picEl.style.backgroundImage || '') : '';
@@ -82,7 +136,7 @@
     var textNode   = qs('.review-text', modal);
 
     if(avatarNode) avatarNode.style.backgroundImage = avatarUrl ? "url('"+avatarUrl+"')" : '';
-    if(starsNode)  starsNode.innerHTML = starsHTML;
+    if(starsNode)  starsNode.innerHTML = starsHTMLStr;
     if(userNode)   userNode.textContent = username + '’s review:';
     if(textNode)   textNode.textContent = reviewText;
 
@@ -144,7 +198,10 @@
     setupNavAccessibility();
     setupOverlayClose();
     setupOutsideCloses();
-    setupReviewOpeners();
+
+    // ← THIS is the new line that loads /assets/data/reviews.json
+    loadReviews();
+
     document.addEventListener('keydown', handleGlobalEsc);
   }
 
