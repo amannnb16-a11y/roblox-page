@@ -186,3 +186,40 @@ body.modal-open { overflow: hidden; }
 .modal .modal-content { overflow: hidden; }  /* was auto */
 .terms-body { max-height: calc(80vh - 70px); overflow: auto; }  /* keep content scroll here */
 
+
+/* Bigger Review Modal */
+#reviewModal .modal-content,
+#reviewModal .review-content{
+  width: min(92vw, 920px);   /* was ~520px */
+  max-height: 85vh;          /* a little taller room */
+}
+
+/* Roomier layout inside the modal */
+#reviewModal .review-layout{
+  grid-template-columns: 160px 1fr;  /* avatar | content */
+  gap: 20px;
+}
+
+/* Larger avatar to match the bigger modal (optional) */
+#reviewModal .review-avatar{
+  width: 160px;
+  height: 160px;
+}
+
+/* Let the review text breathe inside the taller modal */
+#reviewModal .review-text{
+  max-height: calc(85vh - 160px);
+  line-height: 1.5;
+  font-size: 1rem;           /* adjust if you want larger/smaller copy */
+}
+
+/* Mobile fallback so it stays comfy on small screens */
+@media (max-width: 600px){
+  #reviewModal .review-layout{
+    grid-template-columns: 1fr;
+  }
+  #reviewModal .review-avatar{
+    margin-inline: auto;
+  }
+}
+
