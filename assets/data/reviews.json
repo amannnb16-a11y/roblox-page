@@ -29,7 +29,14 @@
       "avatar": "/assets/img/profiles/user-five.webp",
       "rating": 4.5,
       "review": "Delivered as promised."
-    }
+    },
+    {
+      "username": "@pIatonn1",
+      "avatar": "/assets/img/profiles/user-six.webp",
+      "rating": 5,
+      "review": "\"Was done quickly, did not have to query much for him to understand what was needed to be done.\""
+      }
+    
   ]
 }
 
