@@ -223,3 +223,17 @@ body.modal-open { overflow: hidden; }
   }
 }
 
+
+/* 8 profile cards per row on wide screens */
+@media (min-width: 1400px){
+  .profile-section{
+    grid-template-columns: repeat(8, 1fr);  /* was 6 */
+  }
+
+  /* Slightly tighter card to fit eight comfortably */
+  .profile-card{ padding: 10px 8px; }
+  .profile-pic{ width: 86px; height: 86px; }       /* was ~92px */
+  .username{ font-size: 14px; }                    /* a hair smaller */
+  .profile-card .speechbox{ padding: 4px 8px; }    /* keep pill height similar */
+}
+
