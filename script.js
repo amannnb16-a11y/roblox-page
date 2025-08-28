@@ -86,19 +86,22 @@ function closeModal(id){
   }
 
   async function loadReviews(){
-    try{
-      const res = await fetch('/assets/data/reviews.json', { cache: 'no-cache' });
-      if(!res.ok) throw new Error('HTTP '+res.status);
-      const data = await res.json();
-      const list = Array.isArray(data.reviews) ? data.reviews.slice(0,6) : [];
-      while (list.length < 6) list.push({ username:'Your Name', rating:0, review:'Add yours soon!' });
-      const container = $('.profile-section');
-      if(!container) return;
-      container.innerHTML = list.map(renderProfileCard).join('');
-    }catch(err){
-      console.warn('Failed to load reviews.json; leaving any existing cards.', err);
-    }
+  try{
+    const res = await fetch('/assets/data/reviews.json', { cache: 'no-cache' });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
+
+    const list = Array.isArray(data.reviews) ? data.reviews : [];
+    const container = $('.profile-section');
+    if(!container) return;
+
+    // Render every review (no slice, no filler)
+    container.innerHTML = list.map(renderProfileCard).join('');
+  }catch(err){
+    console.warn('Failed to load reviews.json; leaving any existing cards.', err);
   }
+}
+
 
   // ---------- Review modal open ----------
   function openReview(card){
